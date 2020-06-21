@@ -19,36 +19,16 @@ public class BackEndApplication {
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(BackEndApplication.class, args);
 		System.out.println("listening on port "+ 8081);
-		ClientManager client = ClientManager.createClient();
-		// String msg = "{ "getKslTankData": { "vessel": 1 } }";
-
-		//	employeeDetails2.put("firstName", "Brian");
-		JSONObject getShipData = new JSONObject();
-		JSONObject vessel = new JSONObject();
-		vessel.put( "tankId",0 );
-		getShipData.put("setTankSubscriptionOn", vessel);
-		String getShipString = getShipData.toString();
-		/*try {
-			TestWebsocketClient testWebsocketClient = new TestWebsocketClient();
-			client.connectToServer(testWebsocketClient, new URI("ws://194.103.55.106:8089"));
-
-			testWebsocketClient.sendMessage(getShipString);
 
 
-		} catch (DeploymentException | URISyntaxException e) {
+		try (Connection conn = MySQLJDBCUtil.getConnection()) {
 
-			throw new RuntimeException(e);
-
-		}*/
-
-		/*try (Connection conn = MySQLJDBCUtil.getConnection()) {
-
-			// print out a message
 			System.out.println(String.format("Connected to database %s "
 					+ "successfully.", conn.getCatalog()));
+
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
-		}*/
+		}
 	}
 
 
