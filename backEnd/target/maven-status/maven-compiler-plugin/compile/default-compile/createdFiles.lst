@@ -1,4 +1,12 @@
-com\kockumation\backEnd\controller\HelloWorld.class
+com\kockumation\backEnd\service\planPhaseServices\cargos\CargoToBeLoaded.class
 com\kockumation\backEnd\TestWebsocketClient.class
-com\kockumation\backEnd\BackEndApplication.class
 com\kockumation\backEnd\utilities\MySQLJDBCUtil.class
+com\kockumation\backEnd\service\asdad.class
+com\kockumation\backEnd\service\planPhaseServices\cargos\Cargos.class
+com\kockumation\backEnd\service\planPhaseServices\cargos\CargosIds.class
+com\kockumation\backEnd\utilities\WebConfig.class
+com\kockumation\backEnd\service\planPhaseServices\cargos\CargosModel.class
+com\kockumation\backEnd\controller\HelloWorld.class
+com\kockumation\backEnd\BackEndApplication.class
+com\kockumation\backEnd\controller\PlanPhase\cargos.class
+com\kockumation\backEnd\service\planPhaseServices\cargos\CleaningGuideInstructions.class
