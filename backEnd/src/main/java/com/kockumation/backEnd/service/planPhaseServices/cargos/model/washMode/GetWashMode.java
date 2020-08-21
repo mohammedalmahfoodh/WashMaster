@@ -12,7 +12,9 @@ public class GetWashMode {
     @Min(1)
     @Max(11)
     private int washType;
-
+    @Min(1)
+    @Max(2)
+    private int numberOfMachines;
     private double speed;
     @NotNull
     @Min(0)
@@ -86,6 +88,14 @@ public class GetWashMode {
 
     public void setNozzle_diameter(String nozzle_diameter) {
         this.nozzle_diameter = nozzle_diameter;
+    }
+
+    public int getNumberOfMachines() {
+        return numberOfMachines;
+    }
+
+    public void setNumberOfMachines(int numberOfMachines) {
+        this.numberOfMachines = numberOfMachines;
     }
 
     @Override

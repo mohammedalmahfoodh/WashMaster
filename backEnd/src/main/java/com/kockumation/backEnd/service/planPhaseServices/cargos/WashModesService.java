@@ -144,10 +144,11 @@ public class WashModesService {
             // Calculating washing media amount  =  (nozzle diameter throughput * (TimeInMinutes / 60 ))
             double washingMediaAmount = nozzleDiameterTh * (timeInHours);
             washingMediaAmount = roundTowDigits(washingMediaAmount);
+            double allWashingMediaAmount = getWashMode.getNumberOfMachines() * washingMediaAmount ;
 
-            String nozzleFor = String.format("nozzle_diameter_24_throughput for %f hours", timeInHours);
+            String nozzleFor = String.format("nozzle_diameter_24_throughput for %.2f hours", timeInHours);
             JSONObject washingMediaAmountObject = new JSONObject();
-            washingMediaAmountObject.put(nozzleFor, washingMediaAmount);
+            washingMediaAmountObject.put(nozzleFor, allWashingMediaAmount);
             washModeObject.put("washing_Media_Amount", washingMediaAmountObject);
 
             return executor.submit(() -> {
@@ -195,8 +196,9 @@ public class WashModesService {
 
             double washingMediaAmount = nozzleDiameterTh * (timeInHours);
             washingMediaAmount = roundTowDigits(washingMediaAmount);
+            double allWashingMediaAmount = getManualWashMode.getNumberOfMachines() * washingMediaAmount ;
             String nozzleFor = String.format("nozzle_diameter_24_throughput for %.2f hours", timeInHours);
-            washingMediaAmountObject.put(nozzleFor, washingMediaAmount);
+            washingMediaAmountObject.put(nozzleFor, allWashingMediaAmount);
             washModeObject.put("washing_Media_Amount",washingMediaAmountObject);
         } catch (InterruptedException e) {
             e.printStackTrace();
