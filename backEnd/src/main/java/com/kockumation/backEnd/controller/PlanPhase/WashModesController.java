@@ -3,6 +3,7 @@ package com.kockumation.backEnd.controller.PlanPhase;
 
 import com.kockumation.backEnd.service.planPhaseServices.cargos.WashModesService;
 import com.kockumation.backEnd.service.planPhaseServices.cargos.model.machine.MachinePostObject;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.model.washMode.GetManualWashMode;
 import com.kockumation.backEnd.service.planPhaseServices.cargos.model.washMode.GetWashMode;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,36 @@ public class WashModesController {
             } else {
                 responseEntity = new ResponseEntity<JSONObject>(
                         capacityDataThroughput,
+                        HttpStatus.OK);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return responseEntity;
+    } // get Capacity Machines Names
+
+    //*************************************************************************************************************
+    @PostMapping("/getManualWashMode")
+    public ResponseEntity<JSONObject> getManualWashModeData(@Valid @RequestBody GetManualWashMode getManualWashMode) {
+
+        JSONObject washModeObject = null;
+
+        ResponseEntity<JSONObject> responseEntity = null;
+
+        try {
+            washModeObject = washModesService.getManualWashMode(getManualWashMode).get();
+            if (washModeObject.size() == 0) {
+                System.out.println("Not valid information");
+                responseEntity = new ResponseEntity<JSONObject>(
+                        washModeObject,
+                        HttpStatus.BAD_REQUEST);
+            } else {
+                responseEntity = new ResponseEntity<JSONObject>(
+                        washModeObject,
                         HttpStatus.OK);
             }
         } catch (InterruptedException e) {

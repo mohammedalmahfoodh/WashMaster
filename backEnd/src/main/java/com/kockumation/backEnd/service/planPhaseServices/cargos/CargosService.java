@@ -20,7 +20,7 @@ public class CargosService {
             = Executors.newSingleThreadExecutor();
 
     List<CargosModel> cargosModelList = new ArrayList<>();
-    List<CargoToBeLoaded> cargo_to_be_loaded = new ArrayList<>();
+
     List<CleaningGuideInstructions> cleaningGuideInstructions = new ArrayList<>();
 
 
@@ -35,7 +35,7 @@ public class CargosService {
             while (rs.next()) {
                 CargosModel cargosModel = new CargosModel();
                 cargosModel.setCargo_id(rs.getInt("cargo_id"));
-                cargosModel.setCargo_previous_name("cargo_previous_name");
+                cargosModel.setCargo_previous_name(rs.getString("cargo_previous_name"));
                 cargosModelList.add(cargosModel);
 
             }
@@ -52,6 +52,7 @@ public class CargosService {
 
     //Get cargo_to_be_loaded ******** Get cargo_to_be_loaded ********************
     public Future<List<CargoToBeLoaded>> cargoToBeLoaded() {
+        List<CargoToBeLoaded> cargo_to_be_loaded = new ArrayList<>();
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
             String sql = "SELECT * FROM cargo_to_be_loaded";
             Statement stmt = conn.createStatement();
@@ -59,7 +60,7 @@ public class CargosService {
             while (rs.next()) {
                 CargoToBeLoaded cargosModel = new CargoToBeLoaded();
                 cargosModel.setCargo_loaded_id(rs.getInt("cargo_loaded_id"));
-                cargosModel.setCargo_load_name("cargo_load_name");
+                cargosModel.setCargo_load_name(rs.getString("cargo_load_name"));
                 cargo_to_be_loaded.add(cargosModel);
             }
 

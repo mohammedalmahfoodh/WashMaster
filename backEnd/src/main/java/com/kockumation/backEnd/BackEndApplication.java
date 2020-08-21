@@ -1,5 +1,7 @@
 package com.kockumation.backEnd;
 
+import com.kockumation.backEnd.engine.PlanEngine;
+import com.kockumation.backEnd.engine.dataBase.InitiateDataBase;
 import com.kockumation.backEnd.utilities.MySQLJDBCUtil;
 import org.glassfish.tyrus.client.ClientManager;
 import org.json.simple.JSONObject;
@@ -24,14 +26,15 @@ public class BackEndApplication {
 
         System.out.println("listening on port " + 3003);
         boolean checkDataBase = true;
+        PlanEngine planEngine = new PlanEngine();
 
         try {
 
             while (checkDataBase) {
                 try (Connection conn = MySQLJDBCUtil.getConnection()) {
                     checkDataBase = false;
-
                     System.out.println(String.format("Connected to database %s " + "successfully.", conn.getCatalog()));
+                    planEngine.planEngine();
 
                 } catch (SQLException ex) {
                     //System.out.println(ex.getMessage());

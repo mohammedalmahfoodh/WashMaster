@@ -1,10 +1,12 @@
 package com.kockumation.backEnd.service.planPhaseServices.cargos.model.washMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetWashMode {
     @NotNull
     @Min(1)
