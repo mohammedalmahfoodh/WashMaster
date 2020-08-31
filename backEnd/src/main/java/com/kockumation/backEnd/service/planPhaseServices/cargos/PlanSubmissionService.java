@@ -14,14 +14,13 @@ import java.sql.*;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class PlanSubmissionService {
@@ -40,11 +39,34 @@ public class PlanSubmissionService {
         return roundedValue;
     }
 
+    // Is Machine Name Valid ************** Is Machine Name Valid *************** Is Machine Name Valid ***************************
+    public boolean isMachineNameValid(String machineName) {
+        if (machineName != null) {
+            String pattern = "pj[0-9]+_capacity_data";
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(machineName.toLowerCase());
+            boolean isMachineNameValid = m.matches();
+
+            if (isMachineNameValid) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }// Is Machine Name Valid ************** Is Machine Name Valid *************** Is Machine Name Valid ***************************
+
+
+
+
+
+
     // Insert General plan into  General plan table ****************************** Insert General plan into  General plan table   ***************************************
     public Future<Boolean> insertGeneralPlan(GeneralInfo generalInfo) {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
-            String query = "INSERT INTO general_plan (general_plan_id ,vesselName ,voyageId,nextLoadPort,sequenceOfWashing,positionOfTankCleaning,genInfoDate,genInfoTime,userName,manualLocation,machineName,nozzle_diameter) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO general_plan (general_plan_id ,vesselName ,voyageId,nextLoadPort,sequenceOfWashing,positionOfTankCleaning,genInfoDate,genInfoTime,userName,manualLocation,machineName,nozzle_diameter,planID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -60,6 +82,7 @@ public class PlanSubmissionService {
             preparedStmt.setString(10, generalInfo.getManualLocation());
             preparedStmt.setString(11, generalInfo.getMachineName());
             preparedStmt.setString(12, generalInfo.getNozzle_diameter());
+            preparedStmt.setString(13, generalInfo.getPlanID());
             int rowAffected = preparedStmt.executeUpdate();
 
             preparedStmt.clearParameters();
@@ -82,7 +105,7 @@ public class PlanSubmissionService {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
 
-            String query = "INSERT INTO tank_plans (tankPlanId,tankId,tcmId,general_plan_id,cleaningMethod,stepsCtr,tcmIda,tcmIdb,nextCargo,previousCargo,tankCoating,tankAtmosphere,oxygenLevel,tankComments,hc,numberOfMachines) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO tank_plans (tankPlanId,tankId,tcmId,general_plan_id,cleaningMethod,stepsCtr,tcmIda,tcmIdb,nextCargo,previousCargo,tankCoating,tankAtmosphere,oxygenLevel,tankComments,hc,numberOfMachines,cleaningMethod2,nextMarpol,previousMarpol,hcLabel) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             for (Tank tank : tanks) {
@@ -95,14 +118,19 @@ public class PlanSubmissionService {
                 preparedStmt.setInt(6, tank.getStepsCtr());
                 preparedStmt.setInt(7, tank.getTcmIda());
                 preparedStmt.setInt(8, tank.getTcmIdb());
-                preparedStmt.setString(9, tank.getNext());
-                preparedStmt.setString(10, tank.getPrevious());
+                preparedStmt.setString(9, tank.getNextCargo());
+                preparedStmt.setString(10, tank.getPreviousCargo());
                 preparedStmt.setString(11, tank.getTankCoating());
                 preparedStmt.setString(12, tank.getTankAtmosphere());
-                preparedStmt.setDouble(13, tank.getO2Level());
+                preparedStmt.setDouble(13, tank.getOxygenLevel());
                 preparedStmt.setString(14, tank.getTankComments());
                 preparedStmt.setDouble(15, tank.getHc());
                 preparedStmt.setInt(16, tank.getNumberOfMachines());
+                preparedStmt.setInt(17, tank.getCleaningMethod2());
+                preparedStmt.setString(18, tank.getNextMarpol());
+                preparedStmt.setString(19, tank.getPreviousMarpol());
+                preparedStmt.setString(20, tank.getHcLabel());
+
 
                 int rowAffected = preparedStmt.executeUpdate();
 
@@ -130,7 +158,7 @@ public class PlanSubmissionService {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
 
-            String query = "INSERT INTO steps (stepNumber,tankId,tankPlanId,general_plan_id,stepProfile,step_profile_name,timeForOperation,washType,lWsValue,uWsValue,washingMedia,cleaning_time_in_minutes,speed,pitch,washing_Media_Amount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO steps (stepNumber,tankId,tankPlanId,general_plan_id,stepProfile,step_profile_name,timeForOperation,washType,lWsValue,uWsValue,washingMedia,cleaning_time_in_minutes,speed,pitch,washing_Media_Amount,washingMedia2,comments) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             for (Step step : steps) {
@@ -145,12 +173,13 @@ public class PlanSubmissionService {
                 preparedStmt.setInt(8, step.getWashType());
                 preparedStmt.setInt(9, step.getlWsValue());
                 preparedStmt.setInt(10, step.getuWsValue());
-                preparedStmt.setString(11, step.getWashingMedia());
+                preparedStmt.setInt(11, step.getWashingMedia());
                 preparedStmt.setInt(12, step.getCleaning_time_in_minutes());
                 preparedStmt.setInt(13, step.getSpeed());
                 preparedStmt.setDouble(14, step.getPitch());
                 preparedStmt.setDouble(15, step.getWashing_Media_Amount());
-
+                preparedStmt.setInt(16, step.getWashingMedia2());
+                preparedStmt.setString(17, step.getComments());
                 int rowAffected = preparedStmt.executeUpdate();
 
                 preparedStmt.clearParameters();
@@ -176,6 +205,15 @@ public class PlanSubmissionService {
 
     // Submit General plan. ************** Submit General plan. *************** Submit General plan. ***************************
     public Future<Boolean> submitGeneralPlan(SubmissionPlanObject submissionPlanObject) {
+        boolean isMachineNameValid = isMachineNameValid(submissionPlanObject.getGeneralInfo().getMachineName()) ;
+        if (isMachineNameValid){
+            System.out.println("Machine name is valid..");
+        }else {
+            return executor.submit(() -> {
+
+                return false;
+            });
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String general_plan_id = LocalDateTime.now(Clock.systemUTC()).format(formatter);
 
@@ -210,6 +248,7 @@ public class PlanSubmissionService {
                     MachinePostObject machinePostObject = new MachinePostObject();
                     machinePostObject.setBar(step.getBar());
                     machinePostObject.setMachineName(submissionPlanObject.getGeneralInfo().getMachineName());
+                  // System.out.println(machinePostObject);
                     try {
                         washing_capacity = machineService.getCapacityDataForBar(machinePostObject).get();
                     } catch (InterruptedException e) {
@@ -217,19 +256,19 @@ public class PlanSubmissionService {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    double nozzleDiameterTh = (double) washing_capacity.get(submissionPlanObject.getGeneralInfo().getNozzle_diameter());
-                    //    System.out.println(nozzleDiameterTh);
-                    double timeInHours = (double) step.getCleaning_time_in_minutes() / 60;
-                    //  System.out.println(timeInHours);
-                    timeInHours = roundTowDigits(timeInHours);
-                    double washingMediaAmount = nozzleDiameterTh * (timeInHours);
-                    washingMediaAmount = roundTowDigits(washingMediaAmount);
+                     if (step.getBar() >= 6 && step.getBar() <= 12  && submissionPlanObject.getGeneralInfo().getMachineName() !=null){
+                         double nozzleDiameterTh = (double) washing_capacity.get(submissionPlanObject.getGeneralInfo().getNozzle_diameter());
+                         //    System.out.println(nozzleDiameterTh);
+                         double timeInHours = (double) step.getCleaning_time_in_minutes() / 60;
+                         //  System.out.println(timeInHours);
+                         timeInHours = roundTowDigits(timeInHours);
+                         double washingMediaAmount = nozzleDiameterTh * (timeInHours);
+                         washingMediaAmount = roundTowDigits(washingMediaAmount);
 
-                    double allWashingMediaAmount = tank.getNumberOfMachines() * washingMediaAmount;
-                    step.setWashing_Media_Amount(allWashingMediaAmount);
-
+                         double allWashingMediaAmount = tank.getNumberOfMachines() * washingMediaAmount;
+                         step.setWashing_Media_Amount(allWashingMediaAmount);
+                     }
                 }
-
             }
 
         }
@@ -247,7 +286,6 @@ public class PlanSubmissionService {
 
                     for (Tank tank : submissionPlanObject.getTanks()) {
                         stepsInserted = insertStepsPlan(tank.getSteps()).get();
-
                     }
 
                 } else {

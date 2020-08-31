@@ -81,7 +81,7 @@ public class cargosController {
     @PostMapping("/getCleaningInstructions")
     public ResponseEntity<?> getCleaningInstructions(@Valid @RequestBody CargosIds cargosIds) {
 
-        System.out.println(cargosIds.getCargo_id());
+
      //   System.out.println(cleaningInstructions.getCargo_loaded_id());
      //   System.out.println(instanceof cleaningInstructions.getCargo_id());
       //  System.out.println(cleaningInstructions);

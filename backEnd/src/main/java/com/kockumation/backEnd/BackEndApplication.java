@@ -1,22 +1,14 @@
 package com.kockumation.backEnd;
 
 import com.kockumation.backEnd.engine.PlanEngine;
-import com.kockumation.backEnd.engine.dataBase.InitiateDataBase;
 import com.kockumation.backEnd.utilities.MySQLJDBCUtil;
-import org.glassfish.tyrus.client.ClientManager;
-import org.json.simple.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.websocket.DeploymentException;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @SpringBootApplication
 public class BackEndApplication {

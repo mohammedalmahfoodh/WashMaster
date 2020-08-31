@@ -27,7 +27,10 @@ public class Step {
     private String step_profile_name;
 
 
-    private String washingMedia;
+    private int washingMedia;
+
+    private int washingMedia2;
+    private String comments;
 
     private int timeForOperation;
 
@@ -44,6 +47,22 @@ public class Step {
 
     private int washType;
     private double bar;
+
+    public int getWashingMedia2() {
+        return washingMedia2;
+    }
+
+    public void setWashingMedia2(int washingMedia2) {
+        this.washingMedia2 = washingMedia2;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
     public double getBar() {
         return bar;
@@ -109,11 +128,11 @@ public class Step {
         this.step_profile_name = step_profile_name;
     }
 
-    public String getWashingMedia() {
+    public int getWashingMedia() {
         return washingMedia;
     }
 
-    public void setWashingMedia(String washingMedia) {
+    public void setWashingMedia(int washingMedia) {
         this.washingMedia = washingMedia;
     }
 

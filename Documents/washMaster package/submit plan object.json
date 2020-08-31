@@ -1,0 +1,126 @@
+{
+  "generalInfo": {
+    "vesselName": "Mafuta - Verolme",
+    "tankPlanId": "123",
+    "voyageId": "123",
+    "nextLoadPort": "Malmo",
+    "sequenceOfWashing": "123",
+    "positionOfTankCleaning": "Fixed",
+    "manualLocation": "delsjogatan 30",
+    "genInfoDate": "2020-06-03",
+    "genInfoTime": "07:39 PM",
+    "machineName": null,
+    "nozzle_diameter": "nozzle_diameter_24_throughput",
+    "userName": "JC"
+  },
+  "tanks": [
+    {
+      "tankId": 1,
+      "cleaningMethod": "Charterers",
+      "previous": "Naphtha / Clean Condensates / LDF",
+      "next": "Naphtha / Clean Condensates / LDF",
+      "stepsCtr": 2,
+      "tankCoating": "1",
+      "tankAtmosphere": "1",
+      "o2Level": 2.5,
+      "hc": 500.8,
+      "tcmIda": 1,
+      "tcmIdb": 0,
+      "tankComments": "32",
+      "steps": [
+        {
+          "stepProfile": 1,
+          "stepNumber": 1,
+          "timeForOperation": 60,
+          "step_profile_name": "pre-Clean Flushing"
+        },
+        {
+          "stepProfile": 4,
+          "step_profile_name": "Tank wash",
+          "stepNumber": 2,
+          "washingMedia": "Sea water",
+          "lWsValue": 45,
+          "uWsValue": 135,
+          "cleaning_time_in_minutes": 12,
+          "rpm": 1,
+          "bar": 6,
+          "speed": 2,
+          "pitch": 1.5,
+          "washType": 1
+        }
+      ]
+    },
+    {
+      "tankId": 3,
+      "cleaningMethod": "Recommended",
+      "previous": "Naphtha / Clean Condensates / LDF",
+      "next": "Light Fuel Oil (LFO)",
+      "stepsCtr": 1,
+      "tankCoating": "1",
+      "tankAtmosphere": "1",
+      "o2Level": 5,
+      "hc": 400,
+      "tcmIda": 0,
+      "tcmIdb": 6,
+      "tankComments": "Clear blabal to get blaabla",
+      "steps": [
+        {
+          "stepProfile": 4,
+          "step_profile_name": "Tank wash",
+          "stepNumber": 1,
+          "washingMedia": "Fresh water",
+          "lWsValue": 33,
+          "uWsValue": 140,
+          "cleaning_time_in_minutes": 60,
+          "speed": 2,
+          "pitch": 7,
+          "rpm": 1,
+          "bar": 6,
+          "washType": 1
+        }
+      ]
+    },
+    {
+      "tankId": 11,
+      "cleaningMethod": "Charterers",
+      "previous": "Unleaded Motor Spirit",
+      "next": "Dyed Gas Oil",
+      "stepsCtr": 3,
+      "tankCoating": "1",
+      "tankAtmosphere": "1",
+      "o2Level": 2.5,
+      "hc": 300,
+      "tcmIda": 21,
+      "tcmIdb": 22,
+      "tankComments": "Add something to clean up blablalba",
+      "steps": [
+        {
+          "stepProfile": 2,
+          "stepNumber": 1,
+          "timeForOperation": 50,
+          "step_profile_name": "NZ Purge"
+        },
+        {
+          "stepProfile": 3,
+          "stepNumber": 2,
+          "timeForOperation": 20,
+          "step_profile_name": "Gas Freeing"
+        },
+        {
+          "stepProfile": 4,
+          "step_profile_name": "Tank wash",
+          "stepNumber": 3,
+          "washingMedia": "Sea water",
+          "lWsValue": 0,
+          "uWsValue": 180,
+          "cleaning_time_in_minutes": 25,
+          "speed": 2,
+          "pitch": 3,
+          "rpm": 1,
+          "bar": 6,
+          "washType": 1
+        }
+      ]
+    }
+  ]
+}

@@ -84,12 +84,12 @@ public class CargosService {
             String sql = String.format("SELECT cg.cleaning_guide_id,cg.cargo_id,cg.cargo_loaded_id," +
                     "cl.cargo_load_name,p.cargo_previous_name,cg.LUB,cg.M,cg.method,cg.notes,cg.P,cg.M,cg.X,cg.S\n  FROM wash_master.cleaning_guide cg\n" +
                     "  inner join previous_cargo p \n  using(cargo_id)\n  inner join cargo_to_be_loaded cl\n  using(cargo_loaded_id)\n " +
-                    " where (cargo_id = %d and cargo_loaded_id = %d);", cargo_id, cargo_loaded_id);
+                    " where (cargo_id = %d and cargo_loaded_id = %d) ;", cargo_id, cargo_loaded_id) ;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 CleaningGuideInstructions cleaningGuideInstr = new CleaningGuideInstructions();
-                cleaningGuideInstr.setCargo_loaded_id(rs.getInt("cleaning_guide_id"));
+                cleaningGuideInstr.setCleaning_guide_id(rs.getInt("cleaning_guide_id"));
                 cleaningGuideInstr.setCargo_id(rs.getInt("cargo_id"));
                 cleaningGuideInstr.setCargo_loaded_id(rs.getInt("cargo_loaded_id"));
                 cleaningGuideInstr.setMethod(rs.getString("method"));

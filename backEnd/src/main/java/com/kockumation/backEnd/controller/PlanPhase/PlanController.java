@@ -40,8 +40,8 @@ public class PlanController {
                         HttpStatus.OK);
             } else {
                 responseEntity = new ResponseEntity<String>(
-                        "Not Submitted ok..",
-                        HttpStatus.OK);
+                        "Not Submitted",
+                        HttpStatus.BAD_REQUEST);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

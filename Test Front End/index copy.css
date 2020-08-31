@@ -1,0 +1,40 @@
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right,#9c27b0,#8ecdff);
+}
+
+
+
+.progress-bar-custom {
+    background-color: #497ad6;
+  }
+  
+  .progress-bar-striped-custom {
+    background-image: linear-gradient(-45deg,#d2524e 25%,transparent 25%,transparent 50%,#d2524e 50%,#d2524e 75%,transparent 75%,transparent); background-size: 60px 60px;}
+  #stripedBar{
+      margin-top: 100px;
+      width: 100%;
+      background:linear-gradient(-45deg,#d2524e 25%,transparent 25%,transparent 50%,#d2524e 50%,#d2524e 75%,transparent 75%,transparent); background-size: 60px 60px; ;
+  }
+  .container{
+      margin-top: 50px;
+  }
+  .valueH{
+      margin-left: 10%;
+  }
+
+  .btn btn-dark{
+      margin-top: 20px;
+      margin-left: 100px;
+  }
+  .progress{
+      width: 100%;
+     
+  }
+  h6{
+      margin-top: 2px;
+  }
+  #progressbar{
+      height: 25px;
+  }

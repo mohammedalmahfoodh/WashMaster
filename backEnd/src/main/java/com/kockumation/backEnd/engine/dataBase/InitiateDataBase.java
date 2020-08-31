@@ -3,6 +3,8 @@ package com.kockumation.backEnd.engine.dataBase;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kockumation.backEnd.Global.DB;
+import com.kockumation.backEnd.engine.TankCleaningMachine;
 import com.kockumation.backEnd.utilities.MySQLJDBCUtil;
 import com.kockumation.backEnd.utilities.TankInfo;
 import com.kockumation.backEnd.utilities.TanksConfig;
@@ -118,6 +120,16 @@ public class InitiateDataBase {
 
            tanksInformation = new ObjectMapper().readValue(TanksConfig.getTanksConfigString(), TanksInformation.class);
 
+         // Populate tankMap configurations with tanks configurations from file json..
+          for (TankInfo tankInfo:    tanksInformation.getTanksConfig()) {
+              TankCleaningMachine tankCleaningMachine = new TankCleaningMachine();
+              tankCleaningMachine.setTcmID(tankInfo.getTcmId());
+              tankCleaningMachine.setTankId(tankInfo.getTankId());
+              tankCleaningMachine.setTankName(tankInfo.getTankName());
+                DB.tcmMap.put(tankInfo.getTcmId(),tankCleaningMachine);
+            }
+
+           // System.out.println(DB.tankConfigurations.get(1));
         } catch (JsonProcessingException e) {
          //   e.printStackTrace();
             Scanner in = new Scanner(System.in);

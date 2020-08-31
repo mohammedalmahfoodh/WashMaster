@@ -5,11 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tank {
@@ -27,15 +24,22 @@ public class Tank {
     @NotNull
     private String cleaningMethod;
 
-    @NotNull
-    private String previous;
+    private int cleaningMethod2;
 
     @NotNull
-    private String next;
+    private String previousCargo;
+
+    private String nextMarpol;
+
+    private String previousMarpol;
+
+
+    @NotNull
+    private String nextCargo;
     private int stepsCtr;
     private String tankCoating;
     private String tankAtmosphere;
-    private double o2Level;
+    private double oxygenLevel;
     private double hc;
 
     @NotNull
@@ -49,11 +53,43 @@ public class Tank {
     private int tcmIdb;
     private String tankComments;
 
+    private String hcLabel;
 
     private int numberOfMachines;
 
 
 
+    public String getHcLabel() {
+        return hcLabel;
+    }
+
+    public void setHcLabel(String hcLabel) {
+        this.hcLabel = hcLabel;
+    }
+
+    public int getCleaningMethod2() {
+        return cleaningMethod2;
+    }
+
+    public void setCleaningMethod2(int cleaningMethod2) {
+        this.cleaningMethod2 = cleaningMethod2;
+    }
+
+    public String getNextMarpol() {
+        return nextMarpol;
+    }
+
+    public void setNextMarpol(String nextMarpol) {
+        this.nextMarpol = nextMarpol;
+    }
+
+    public String getPreviousMarpol() {
+        return previousMarpol;
+    }
+
+    public void setPreviousMarpol(String previousMarpol) {
+        this.previousMarpol = previousMarpol;
+    }
 
     public int getNumberOfMachines() {
         return numberOfMachines;
@@ -111,20 +147,20 @@ public class Tank {
         this.cleaningMethod = cleaningMethod;
     }
 
-    public String getPrevious() {
-        return previous;
+    public String getPreviousCargo() {
+        return previousCargo;
     }
 
-    public void setPrevious(String previous) {
-        this.previous = previous;
+    public void setPreviousCargo(String previousCargo) {
+        this.previousCargo = previousCargo;
     }
 
-    public String getNext() {
-        return next;
+    public String getNextCargo() {
+        return nextCargo;
     }
 
-    public void setNext(String next) {
-        this.next = next;
+    public void setNextCargo(String nextCargo) {
+        this.nextCargo = nextCargo;
     }
 
     public int getStepsCtr() {
@@ -151,12 +187,12 @@ public class Tank {
         this.tankAtmosphere = tankAtmosphere;
     }
 
-    public double getO2Level() {
-        return o2Level;
+    public double getOxygenLevel() {
+        return oxygenLevel;
     }
 
-    public void setO2Level(double o2Level) {
-        this.o2Level = o2Level;
+    public void setOxygenLevel(double oxygenLevel) {
+        this.oxygenLevel = oxygenLevel;
     }
 
     public double getHc() {
@@ -200,16 +236,20 @@ public class Tank {
                 ", general_plan_id='" + general_plan_id + '\'' +
                 ", tankId=" + tankId +
                 ", cleaningMethod='" + cleaningMethod + '\'' +
-                ", previous='" + previous + '\'' +
-                ", next='" + next + '\'' +
+                ", cleaningMethod2=" + cleaningMethod2 +
+                ", previousCargo='" + previousCargo + '\'' +
+                ", nextMarpol='" + nextMarpol + '\'' +
+                ", previousMarpol='" + previousMarpol + '\'' +
+                ", nextCargo='" + nextCargo + '\'' +
                 ", stepsCtr=" + stepsCtr +
                 ", tankCoating='" + tankCoating + '\'' +
                 ", tankAtmosphere='" + tankAtmosphere + '\'' +
-                ", o2Level=" + o2Level +
+                ", o2Level=" + oxygenLevel +
                 ", hc=" + hc +
                 ", tcmIda=" + tcmIda +
                 ", tcmIdb=" + tcmIdb +
                 ", tankComments='" + tankComments + '\'' +
+                ", hcLabel='" + hcLabel + '\'' +
                 ", numberOfMachines=" + numberOfMachines +
                 '}';
     }

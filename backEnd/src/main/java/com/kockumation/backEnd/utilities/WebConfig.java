@@ -37,7 +37,7 @@ public class WebConfig implements Filter {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Pre-flight");
+
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Headers", "authorization, content-type," +

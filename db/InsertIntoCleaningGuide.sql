@@ -468,8 +468,8 @@ INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes,S) VALUES (22,
    Row 20 Row 20  Row 20  Row 20  Row 20 Row 20 Row 20  Row 20  Row 20  Row 20 Row 20 Row 20  Row 20  Row 20  Row 20 */ 
 INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes,P,X) VALUES  (1,20,@blueMethod,@notes123,@p,@x);
 INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes,P,X) VALUES  (2,20,@blueMethod,@notes123,@p,@x);
-INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes) VALUES  (3,16,@blueMethod,@notes123);
-INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes) VALUES  (4,16,@blueMethod,@notes123);
+INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes) VALUES  (3,20,@blueMethod,@notes123);
+INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes) VALUES  (4,20,@blueMethod,@notes123);
 INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes,P,X) VALUES  (5,20,@blueMethod,@notes123,@p,@x);
 INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes,P,X) VALUES  (6,20,@blueMethod,@notes123,@p,@x); 
 INSERT INTO cleaning_guide (cargo_id,cargo_loaded_id,method,notes) VALUES  (7,20,@blueMethod,@notes123);

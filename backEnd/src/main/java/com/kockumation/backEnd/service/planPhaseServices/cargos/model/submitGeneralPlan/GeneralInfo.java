@@ -13,7 +13,7 @@ public class GeneralInfo {
     @NotNull
     private String vesselName;
 
-
+  private String planID;
 
     @NotNull
     private String voyageId;
@@ -39,6 +39,15 @@ public class GeneralInfo {
     private String nozzle_diameter;
 
     private String userName;
+
+
+    public String getPlanID() {
+        return planID;
+    }
+
+    public void setPlanID(String planID) {
+        this.planID = planID;
+    }
 
     public String getGeneral_plan_id() {
         return general_plan_id;
@@ -142,6 +151,7 @@ public class GeneralInfo {
         return "GeneralInfo{" +
                 "general_plan_id='" + general_plan_id + '\'' +
                 ", vesselName='" + vesselName + '\'' +
+                ", planID='" + planID + '\'' +
                 ", voyageId='" + voyageId + '\'' +
                 ", nextLoadPort='" + nextLoadPort + '\'' +
                 ", sequenceOfWashing='" + sequenceOfWashing + '\'' +
