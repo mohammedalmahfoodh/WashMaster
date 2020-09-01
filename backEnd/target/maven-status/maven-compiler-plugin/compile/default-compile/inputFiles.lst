@@ -9,6 +9,7 @@ F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\servic
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\cargo\CleaningGuideInstructions.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan\GetGeneralPlanById.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\tankInfo\GetTankInfo.java
+F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\executionPhase\model\startPreWash\StartPreWash.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\controller\PlanPhase\MachineController.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\utilities\TanksConfig.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\GetGeneralPlan.java

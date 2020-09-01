@@ -11,6 +11,16 @@ public class MachineName {
     @NotBlank(message = "Machine name is mandatory")
     private String machineName;
 
+    private  String nozzle_diameter;
+
+    public String getNozzle_diameter() {
+        return nozzle_diameter;
+    }
+
+    public void setNozzle_diameter(String nozzle_diameter) {
+        this.nozzle_diameter = nozzle_diameter;
+    }
+
     public String getMachineName() {
         return machineName;
     }

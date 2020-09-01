@@ -30,8 +30,8 @@ public class StartWash {
     @Max(50)
     private double rpm;
     @NotNull
-    @Min(1)
-    @Max(1500)
+    @Min(6)
+    @Max(12)
     private double bar;
     @NotNull
     @Min(1)
@@ -55,6 +55,8 @@ public class StartWash {
     @Min(0)
     @Max(360)
     private double uWsValue;
+
+
 
 
     public String getGeneral_plan_id() {

@@ -9,6 +9,25 @@ public class TankInfo {
     private String tankName ;
     private int tcmId;
     private String machine_char;
+    private String machineName;
+    private String nozzle_diameter;
+
+
+    public String getMachineName() {
+        return machineName;
+    }
+
+    public void setMachineName(String machineName) {
+        this.machineName = machineName;
+    }
+
+    public String getNozzle_diameter() {
+        return nozzle_diameter;
+    }
+
+    public void setNozzle_diameter(String nozzle_diameter) {
+        this.nozzle_diameter = nozzle_diameter;
+    }
 
     public int getTankId() {
         return tankId;
@@ -49,6 +68,8 @@ public class TankInfo {
                 ", tankName='" + tankName + '\'' +
                 ", tcmId=" + tcmId +
                 ", machine_char='" + machine_char + '\'' +
+                ", machineName='" + machineName + '\'' +
+                ", nozzle_diameter='" + nozzle_diameter + '\'' +
                 '}';
     }
 }

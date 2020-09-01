@@ -1,5 +1,6 @@
 package com.kockumation.backEnd.service.planPhaseServices.cargos;
 
+import com.kockumation.backEnd.service.planPhaseServices.cargos.model.machine.MachineName;
 import com.kockumation.backEnd.service.planPhaseServices.cargos.model.machine.MachinePostObject;
 import com.kockumation.backEnd.utilities.MySQLJDBCUtil;
 import org.json.simple.JSONObject;
@@ -64,6 +65,36 @@ public class MachineService {
             });
         }
     } //Is machine name exists ******** Is machine name exists  ********************
+
+
+
+    // Get Machine Name and Nozzle Diameter ******** Get Machine Name and Nozzle Diameter  ********************
+    public Future<MachineName> getMachineNameNozzleDiameter(String general_plan_id) {
+        MachineName machineName = new MachineName();
+        String sql = String.format("SELECT machineName,nozzle_diameter  FROM general_plan  WHERE general_plan_id =%s",general_plan_id);
+        try (Connection conn = MySQLJDBCUtil.getConnection()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                machineName.setMachineName(rs.getString("machineName"));
+                machineName.setMachineName(rs.getString("nozzle_diameter"));
+                return executor.submit(() -> {
+                    return machineName;
+                });
+            } else {
+                return executor.submit(() -> {
+
+                    return machineName;
+                });
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return executor.submit(() -> {
+
+                return machineName;
+            });
+        }
+    } // Get Machine Name and Nozzle Diameter ******** Get Machine Name and Nozzle Diameter  ********************
 
     //Get Bar throughput object ************ Get Bar throughput object  ********************
     public Future<JSONObject> getBarThroughPutObject(MachinePostObject machinePostObject) {

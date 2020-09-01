@@ -1,5 +1,6 @@
 package com.kockumation.backEnd;
 
+import com.kockumation.backEnd.Global.DB;
 import com.kockumation.backEnd.engine.PlanEngine;
 import com.kockumation.backEnd.utilities.MySQLJDBCUtil;
 import org.springframework.boot.SpringApplication;

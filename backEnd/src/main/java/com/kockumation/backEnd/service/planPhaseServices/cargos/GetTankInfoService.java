@@ -27,8 +27,7 @@ public class GetTankInfoService {
     public Future<List<GetTankInfo>> getTankInfo() {
         List<GetTankInfo> getTankInfoList = new ArrayList<>();
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
-            String sql = "select ti.tankId,ti.tankName,ti.tcmId,ti.machine_char\n" +
-                    "               from tank_info ti";
+            String sql = "select * from tank_info ";
 
 
             Statement stmt = conn.createStatement();
@@ -39,6 +38,8 @@ public class GetTankInfoService {
                 getTankInfo.setTcmId(rs.getInt("tcmId"));
                 getTankInfo.setTankName(rs.getString("tankName"));
                 getTankInfo.setMachine_char(rs.getString("machine_char"));
+                getTankInfo.setMachineName(rs.getString("machineName"));
+                getTankInfo.setNozzle_diameter(rs.getString("nozzle_diameter"));
                 getTankInfoList.add(getTankInfo);
             }
 

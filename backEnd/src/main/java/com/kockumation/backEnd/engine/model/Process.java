@@ -98,7 +98,19 @@ public class Process {
         RemainingTime = remainingTime;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Process{" +
+                "tcmId=" + tcmId +
+                ", step_profile_name='" + step_profile_name + '\'' +
+                ", finishTime='" + finishTime + '\'' +
+                ", elapsedTime='" + elapsedTime + '\'' +
+                ", RemainingTime='" + RemainingTime + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", decimalOfPercentage=" + decimalOfPercentage +
+                ", processStatus=" + processStatus +
+                ", currentNozzleAngle=" + currentNozzleAngle +
+                ", stringCurrentNozzleAngle='" + stringCurrentNozzleAngle + '\'' +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ com\kockumation\backEnd\utilities\MySQLJDBCUtil.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\PlanSubmissionService.class
 com\kockumation\backEnd\service\executionPhase\StartStopSessionService.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\machine\MachinePostObject.class
+com\kockumation\backEnd\engine\TankCleaningMachine$2.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\MachineService.class
 com\kockumation\backEnd\engine\model\Process.class
 com\kockumation\backEnd\controller\PlanPhase\WashModesController.class
@@ -41,3 +42,4 @@ com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan
 com\kockumation\backEnd\utilities\TanksConfig.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\cargo\CleaningGuideInstructions.class
 com\kockumation\backEnd\engine\TankCleaningMachine$1.class
+com\kockumation\backEnd\service\executionPhase\model\startPreWash\StartPreWash.class

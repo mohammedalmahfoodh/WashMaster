@@ -7,6 +7,9 @@ import com.kockumation.backEnd.service.executionPhase.model.startPreWash.StartPr
 import com.kockumation.backEnd.service.executionPhase.model.startWash.StartWash;
 import com.kockumation.backEnd.service.executionPhase.model.startWash.StopSession;
 import com.kockumation.backEnd.service.planPhaseServices.cargos.GetGeneralPlan;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.MachineService;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.model.machine.MachinePostObject;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ public class StartStopSessionService {
 
     @Autowired
     GetGeneralPlan generalPlan;
+    @Autowired
+    MachineService  machineService;
 
     private ExecutorService executor;
 
@@ -212,8 +217,30 @@ public class StartStopSessionService {
         }
 
         if (canStartWashOrNot) {
-
             TankCleaningMachine tankCleaningMachine = DB.tcmMap.get(startWash.getTcmId());
+            JSONObject washing_capacity = new JSONObject();
+            MachinePostObject machinePostObject = new MachinePostObject();
+            machinePostObject.setBar(startWash.getBar());
+            machinePostObject.setMachineName(tankCleaningMachine.getMachineName());
+          //  System.out.println(machinePostObject);
+            try {
+                washing_capacity = machineService.getCapacityDataForBar(machinePostObject).get();
+
+                System.out.println(washing_capacity);
+                double nozzleDiameterTh = (double) washing_capacity.get(tankCleaningMachine.getNozzle_diameter());
+                tankCleaningMachine.setNozzle_diameter_throughput(nozzleDiameterTh);
+
+
+             /*   double timeInHours = cleaningTimeInMinutes / 60;
+                timeInHours = roundTowDigits(timeInHours);
+
+                double washingMediaAmount = nozzleDiameterTh * (timeInHours);*/
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
             tankCleaningMachine.createNewWashOperation(startWash);
 
             return executor.submit(() -> {

@@ -29,4 +29,12 @@ public class CargosModel {
     public void setCargo_previous_name(String cargo_previous_name) {
         this.cargo_previous_name = cargo_previous_name;
     }
+
+    @Override
+    public String toString() {
+        return "CargosModel{" +
+                "cargo_id=" + cargo_id +
+                ", cargo_previous_name='" + cargo_previous_name + '\'' +
+                '}';
+    }
 }

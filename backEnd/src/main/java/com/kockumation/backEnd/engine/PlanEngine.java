@@ -1,5 +1,6 @@
 package com.kockumation.backEnd.engine;
 
+import com.kockumation.backEnd.Global.DB;
 import com.kockumation.backEnd.engine.dataBase.InitiateDataBase;
 import com.kockumation.backEnd.utilities.TankInfo;
 
@@ -38,6 +39,7 @@ public class PlanEngine {
               }
                 if (tanksInfoInserted){
                     System.out.println("Tanks info inserted...");
+                  //  DB.iterateTankConfigurations();
                 }
           } catch (InterruptedException e) {
               e.printStackTrace();

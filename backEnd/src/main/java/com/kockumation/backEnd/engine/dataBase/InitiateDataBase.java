@@ -63,13 +63,16 @@ public class InitiateDataBase {
     public Future<Boolean> updateTanksInfoTable() {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
-            String updateTanksInfo = "UPDATE tank_info set tankId = ?,tankName =?,machine_char =? where (tcmId = ? );";
+            String updateTanksInfo = "UPDATE tank_info set tankId = ?,tankName =?,machine_char =?,machineName =?,nozzle_diameter=?  where (tcmId = ? );";
             PreparedStatement preparedStmt = conn.prepareStatement(updateTanksInfo, Statement.RETURN_GENERATED_KEYS);
             for (TankInfo tankInfo : tanksInformation.getTanksConfig()) {
                 preparedStmt.setInt(1, tankInfo.getTankId());
                 preparedStmt.setString(2, tankInfo.getTankName());
                 preparedStmt.setString(3, tankInfo.getMachine_char());
-                preparedStmt.setInt(4, tankInfo.getTcmId());
+                preparedStmt.setString(4, tankInfo.getMachineName());
+                preparedStmt.setString(5, tankInfo.getNozzle_diameter());
+                preparedStmt.setInt(6, tankInfo.getTcmId());
+
                 int rowAffected = preparedStmt.executeUpdate();
                 preparedStmt.clearParameters();
             }
@@ -91,12 +94,15 @@ public class InitiateDataBase {
     public Future<Boolean> insertTanksInfoTable() {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
-            String query = "INSERT INTO tank_info (tankId,tankName,machine_char) VALUES (?,?,?);";
+            String query = "INSERT INTO tank_info (tankId,tankName,machine_char,machineName,nozzle_diameter) VALUES (?,?,?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             for (TankInfo tankInfo : tanksInformation.getTanksConfig()) {
                 preparedStmt.setInt(1, tankInfo.getTankId());
                 preparedStmt.setString(2, tankInfo.getTankName());
                 preparedStmt.setString(3, tankInfo.getMachine_char());
+                preparedStmt.setString(4, tankInfo.getMachineName());
+                preparedStmt.setString(5, tankInfo.getNozzle_diameter());
+
                 int rowAffected = preparedStmt.executeUpdate();
                 preparedStmt.clearParameters();
             }
@@ -126,6 +132,8 @@ public class InitiateDataBase {
               tankCleaningMachine.setTcmID(tankInfo.getTcmId());
               tankCleaningMachine.setTankId(tankInfo.getTankId());
               tankCleaningMachine.setTankName(tankInfo.getTankName());
+              tankCleaningMachine.setMachineName(tankInfo.getMachineName());
+              tankCleaningMachine.setNozzle_diameter(tankInfo.getNozzle_diameter());
                 DB.tcmMap.put(tankInfo.getTcmId(),tankCleaningMachine);
             }
 

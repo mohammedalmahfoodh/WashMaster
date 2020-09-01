@@ -19,16 +19,18 @@ public class CargosService {
     private ExecutorService executor
             = Executors.newSingleThreadExecutor();
 
-    List<CargosModel> cargosModelList = new ArrayList<>();
 
-    List<CleaningGuideInstructions> cleaningGuideInstructions = new ArrayList<>();
+
+
 
 
 
 
     //Get previous cargos ******** Get previous cargos ********************
     public Future<List<CargosModel>> getPreviousCargos() {
+        List<CargosModel> cargosModelList = new ArrayList<>();
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
+
             String sql = "SELECT * FROM previous_cargo";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -37,6 +39,7 @@ public class CargosService {
                 cargosModel.setCargo_id(rs.getInt("cargo_id"));
                 cargosModel.setCargo_previous_name(rs.getString("cargo_previous_name"));
                 cargosModelList.add(cargosModel);
+                System.out.println(cargosModel);
 
             }
 
@@ -54,6 +57,7 @@ public class CargosService {
     public Future<List<CargoToBeLoaded>> cargoToBeLoaded() {
         List<CargoToBeLoaded> cargo_to_be_loaded = new ArrayList<>();
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
+
             String sql = "SELECT * FROM cargo_to_be_loaded";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -76,6 +80,7 @@ public class CargosService {
 
     //Get Cleaning instructions ******** Get Cleaning instructions ********************
     public Future<List<CleaningGuideInstructions>> GetCleaningInstructions(CargosIds cargosIds) {
+        List<CleaningGuideInstructions> cleaningGuideInstructions = new ArrayList<>();
         int cargo_id = cargosIds.getCargo_id();
         int cargo_loaded_id = cargosIds.getCargo_loaded_id();
 

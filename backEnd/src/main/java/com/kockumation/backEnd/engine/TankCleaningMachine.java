@@ -5,18 +5,27 @@ import com.kockumation.backEnd.engine.model.Process;
 import com.kockumation.backEnd.engine.model.TimePeriod;
 import com.kockumation.backEnd.service.executionPhase.model.startPreWash.StartPreWash;
 import com.kockumation.backEnd.service.executionPhase.model.startWash.StartWash;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.GetGeneralPlan;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.MachineService;
+import com.kockumation.backEnd.service.planPhaseServices.cargos.model.machine.MachinePostObject;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TankCleaningMachine {
-
+    @Autowired
+    private MachineService machineService;
+    @Autowired
+    private GetGeneralPlan getGeneralPlan;
 
     @Min(1)
     @Max(55)
@@ -59,14 +68,21 @@ public class TankCleaningMachine {
     boolean runningSession;
     private double currentNozzleAngle;
     private String stringCurrentNozzleAngle;
-
+    private String machineName;
+    private String nozzle_diameter;
+    private double nozzle_diameter_throughput;
+    private double nozzle_diameter_throughput_forTotalTime;
     private Timer timer;
 
     private ExecutorService executor;
 
+
+
     public TankCleaningMachine() {
         executor
                 = Executors.newSingleThreadExecutor();
+        process = new Process();
+
     }
 
     private double getCurrentNa(double elapsedInMinutes) {
@@ -128,8 +144,9 @@ public class TankCleaningMachine {
     //// Create new Wash Operation **************************************  Create new Wash Operation *************** //////////
     public void createNewWashOperation(StartWash startWash) {
         if (timer == null) {
+           
             timer = new Timer();
-            process = new Process();
+
             this.setRunningSession(true);
             elapsedTime = new TimePeriod("Elapsed time");
             remainingTime = new TimePeriod("Remaining time");
@@ -153,8 +170,9 @@ public class TankCleaningMachine {
     //// Create new Pre Wash Operation **************************************  Create new Pre Wash Operation *************** //////////
     public void createNewPreWashOperation(StartPreWash startPreWash) {
         if (timer == null) {
+
             timer = new Timer();
-            process = new Process();
+        //    process = new Process();
             this.setRunningSession(true);
             elapsedTime = new TimePeriod("Elapsed time");
             remainingTime = new TimePeriod("Remaining time");
@@ -337,6 +355,22 @@ public class TankCleaningMachine {
     } // Start Wash ***************************************** Start Wash ********************************
 
 
+    public String getMachineName() {
+        return machineName;
+    }
+
+    public void setMachineName(String machineName) {
+        this.machineName = machineName;
+    }
+
+    public String getNozzle_diameter() {
+        return nozzle_diameter;
+    }
+
+    public void setNozzle_diameter(String nozzle_diameter) {
+        this.nozzle_diameter = nozzle_diameter;
+    }
+
     public Process getProcess() {
         return process;
     }
@@ -497,6 +531,21 @@ public class TankCleaningMachine {
         this.tankName = tankName;
     }
 
+    public double getNozzle_diameter_throughput() {
+        return nozzle_diameter_throughput;
+    }
+
+    public void setNozzle_diameter_throughput(double nozzle_diameter_throughput) {
+        this.nozzle_diameter_throughput = nozzle_diameter_throughput;
+    }
+
+    public double getNozzle_diameter_throughput_forTotalTime() {
+        return nozzle_diameter_throughput_forTotalTime;
+    }
+
+    public void setNozzle_diameter_throughput_forTotalTime(double nozzle_diameter_throughput_forTotalTime) {
+        this.nozzle_diameter_throughput_forTotalTime = nozzle_diameter_throughput_forTotalTime;
+    }
 
     @Override
     public String toString() {
@@ -511,10 +560,23 @@ public class TankCleaningMachine {
                 ", bar=" + bar +
                 ", speed=" + speed +
                 ", pitch=" + pitch +
+                ", elapsedTime=" + elapsedTime +
+                ", remainingTime=" + remainingTime +
+                ", finishTime=" + finishTime +
+                ", wholeTime=" + wholeTime +
+                ", elapsedTimeMilli=" + elapsedTimeMilli +
+                ", decimalOfPercentage=" + decimalOfPercentage +
+                ", percentage='" + percentage + '\'' +
+                ", process=" + process +
+                ", processStatus=" + processStatus +
                 ", cleaning_time_in_minutes=" + cleaning_time_in_minutes +
                 ", lWsValue=" + lWsValue +
                 ", uWsValue=" + uWsValue +
+                ", washingSector=" + washingSector +
                 ", runningSession=" + runningSession +
+                ", currentNozzleAngle=" + currentNozzleAngle +
+                ", stringCurrentNozzleAngle='" + stringCurrentNozzleAngle + '\'' +
+                ", timer=" + timer +
                 ", executor=" + executor +
                 '}';
     }

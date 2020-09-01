@@ -167,6 +167,8 @@ CREATE TABLE IF NOT EXISTS tank_info (
     tankId int DEFAULT 0 ,        
     tankName VARCHAR(25)DEFAULT NULL,   
     machine_char VARCHAR(5) default NULL,
+    machineName VARCHAR(50) default NULL,
+    nozzle_diameter VARCHAR(50) default NULL,
     PRIMARY KEY (tcmId)
 );
 CREATE TABLE IF NOT EXISTS tank_plans (
