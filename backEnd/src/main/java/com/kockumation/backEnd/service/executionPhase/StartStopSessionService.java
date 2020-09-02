@@ -226,15 +226,10 @@ public class StartStopSessionService {
             try {
                 washing_capacity = machineService.getCapacityDataForBar(machinePostObject).get();
 
-                System.out.println(washing_capacity);
+                //System.out.println(washing_capacity);
                 double nozzleDiameterTh = (double) washing_capacity.get(tankCleaningMachine.getNozzle_diameter());
                 tankCleaningMachine.setNozzle_diameter_throughput(nozzleDiameterTh);
 
-
-             /*   double timeInHours = cleaningTimeInMinutes / 60;
-                timeInHours = roundTowDigits(timeInHours);
-
-                double washingMediaAmount = nozzleDiameterTh * (timeInHours);*/
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

@@ -15,7 +15,7 @@ public class StartWash {
     @NotNull
     @Min(1)
     @Max(15)
-    private int stepProfile;
+    private int stepNumber;
 
     @NotNull
     @NotBlank(message = "General Plan Id is mandatory")
@@ -36,7 +36,7 @@ public class StartWash {
     @NotNull
     @Min(1)
     @Max(1500)
-    private double speed;
+    private int speed;
     @NotNull
     @Min(1)
     @Max(1500)
@@ -75,12 +75,12 @@ public class StartWash {
         this.tcmId = tcmId;
     }
 
-    public int getStepProfile() {
-        return stepProfile;
+    public int getStepNumber() {
+        return stepNumber;
     }
 
-    public void setStepProfile(int stepProfile) {
-        this.stepProfile = stepProfile;
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
     }
 
     public String getStep_profile_name() {
@@ -115,11 +115,11 @@ public class StartWash {
         this.bar = bar;
     }
 
-    public double getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 

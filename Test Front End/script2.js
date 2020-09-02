@@ -13,7 +13,10 @@ window.onload = () => {
     ///************************************** */
 
     let progressbar = document.getElementById('progressbar');
-   
+    let part = 1;
+    let whole = 100;
+
+
     ///******************** */
     let finishTimeDom = document.getElementById('finishTime');
     let elapsedTimeDom = document.getElementById('elapsedTime');
@@ -21,6 +24,12 @@ window.onload = () => {
     let percentageDom = document.getElementById('percentage');
     let processStatusDom = document.getElementById('processStatus');
     let currentNozzleAngleDom = document.getElementById('currentNozzleAngle');
+    let nozzleDiameterDom = document.getElementById('nozzleDiameter');
+    let throughputPerHourDom = document.getElementById('nozzleDiameterThroughput');
+    let stepDom = document.getElementById('stepNumber');
+    let stepProfileNameDom = document.getElementById('stepProfileName');
+
+
 
     let finishTime;
     let elapsedTime;
@@ -29,6 +38,10 @@ window.onload = () => {
     let percentage;
     let processStatus;
     let currentNozzleAngle;
+    let nozzleDiameter;
+    let throughputPerHour;
+    let step;
+    let stepProfileName;
 
 
     let resumeProcess = function () {
@@ -73,24 +86,33 @@ window.onload = () => {
                     processStatus = res.data.processStatus;
                     percentage = res.data.percentage;
                     currentNozzleAngle = res.data.stringCurrentNozzleAngle;
+                     nozzleDiameter = res.data.nozzle_diameter;
+                    throughputPerHour = res.data.nozzle_diameter_throughput;
+                    step = res.data.stepNumber;
+                    stepProfileName = res.data.step_profile_name;
+
                     //******************************************************* */
                     finishTimeDom.innerText = finishTime;
                     elapsedTimeDom.innerText = elapsedTime;
                     remainingTimeDom.innerText = remainingTime;
                     percentageDom.innerText = percentage;
                     currentNozzleAngleDom.innerText = currentNozzleAngle ;
+                    nozzleDiameterDom.innerText = nozzleDiameter ;
+                    throughputPerHourDom.innerHTML = throughputPerHour;
+                    stepDom.innerText = step;
+                    stepProfileNameDom.innerText = stepProfileName;
                     progressbar.style.setProperty('width', decimalOfPercentage + '%');
                     progressbar.style.setProperty('aria-valuenow', decimalOfPercentage);
                     switch (processStatus) {
                         case 0:
                           processStatusDom.innerText = 'Finished';
                           progressbar.style.setProperty('color', '#07ad65');
-                          processStatusDom.style.setProperty('color','#43ba63');
+                          processStatusDom.style.setProperty('color','#1b614e');
                           
                             break;
 
                         case 1:
-                            processStatusDom.innerText = 'Working';
+                            processStatusDom.innerText = 'Working...';
                             progressbar.style.setProperty('color', '#eb4934');
                             processStatusDom.style.setProperty('color','#611309');
                             break;
@@ -101,7 +123,10 @@ window.onload = () => {
                             processStatusDom.style.setProperty('color','yellow');
                             break;
                             case 3:
-                                alert("The process has been finished Jc thanks for your patient, regardly stop the operation .");
+                                processStatusDom.innerText = 'Operation finished click stop';
+                                progressbar.style.setProperty('color', 'orange');
+                                processStatusDom.style.setProperty('color','orange');
+                            //    alert("The process has been finished Jc thanks for your patient, regardly stop the operation .");
                             break;
 
                         default:
@@ -134,17 +159,17 @@ window.onload = () => {
 
     let startWash = function () {
         axios.post('http://192.168.12.68:3003/api/startWash', {
-            tcmId:2,
-            general_plan_id: "2020-08-28 08:49:37",
-            stepProfile: 4,
+            tcmId: 2,
+            general_plan_id: "2020-09-01 13:33:12",
+            stepNumber: 4,
             step_profile_name: "wash",
             rpm: 2,
-            bar: 2,
+            bar: 10.5,
             speed: 2,
             pitch: 2,
             lWsValue: 0,
             uWsValue: 30,
-            cleaning_time_in_minutes: 7
+            cleaning_time_in_minutes: 8
         }
 
         ).then((result) => {

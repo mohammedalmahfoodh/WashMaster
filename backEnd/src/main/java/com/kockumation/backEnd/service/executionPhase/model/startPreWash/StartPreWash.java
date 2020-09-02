@@ -23,8 +23,8 @@ public class StartPreWash {
     @NotNull
     @Min(1)
     @Max(15)
-    private int stepProfile;
-
+    private int stepNumber;
+    //private int stepNumber;
     @NotNull
     @Min(1)
     @Max(500000)
@@ -54,12 +54,12 @@ public class StartPreWash {
         this.step_profile_name = step_profile_name;
     }
 
-    public int getStepProfile() {
-        return stepProfile;
+    public int getStepNumber() {
+        return stepNumber;
     }
 
-    public void setStepProfile(int stepProfile) {
-        this.stepProfile = stepProfile;
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
     }
 
     public int getTimeForOperation() {
@@ -76,7 +76,7 @@ public class StartPreWash {
                 "general_plan_id='" + general_plan_id + '\'' +
                 ", tcmId=" + tcmId +
                 ", step_profile_name='" + step_profile_name + '\'' +
-                ", stepProfile=" + stepProfile +
+                ", stepProfile=" + stepNumber +
                 ", timeForOperation=" + timeForOperation +
                 '}';
     }

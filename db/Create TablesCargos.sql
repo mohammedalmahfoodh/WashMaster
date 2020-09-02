@@ -247,28 +247,35 @@ CREATE TABLE IF NOT EXISTS wash_modes (
 );
 CREATE TABLE IF NOT EXISTS sessions (
     session_id VARCHAR(100) NOT NULL,
+    general_plan_id VARCHAR(100) NOT NULL,
     session_start_date VARCHAR(100),
-    session_end_date VARCHAR(100),
-    tcmId float ,
-    tankId float ,
-    PRIMARY KEY (session_id)
+    session_end_date VARCHAR(100),    
+    PRIMARY KEY (session_id),
+    foreign key (general_plan_id) references general_plan (general_plan_id) on delete cascade 
+   ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reports (
-    report_id VARCHAR(100) NOT NULL,  
-    session_id VARCHAR(100) NOT NULL,
-    washType int ,       
-    stepId int,
+    report_id VARCHAR(100) NOT NULL,   
+    session_id VARCHAR(100) DEFAULT NULL,
+    general_plan_id VARCHAR(100) NOT NULL, 
+    tcmId int NOT NULL ,   
+    machineName varchar(100) DEFAULT NULL,
+    nozzle_diameter varchar(100) DEFAULT NULL,
+    nozzle_diameter_throughput double DEFAULT 0.0,
+    stepNumber int DEFAULT 0,
+    step_profile_name varchar(100) DEFAULT NULL,
     cleaning_time varchar(100) DEFAULT NULL,
     report_start_date VARCHAR(100),
-    report_end_date VARCHAR(100),          
-    cycle INT DEFAULT NULL,
-    rpm INT default null,
-    PRIMARY KEY (report_id),    
-    FOREIGN KEY (session_id)
-        REFERENCES sessions (session_id) ON DELETE CASCADE,
-        FOREIGN KEY (washType)
-        REFERENCES wash_modes (washType)    ON DELETE CASCADE
+    report_end_date VARCHAR(100),      
+    cycle INT DEFAULT 0,
+    rpm double default 0.0,
+    speed int(11) DEFAULT 0,
+    pitch double DEFAULT 0.0,
+    washing_Media_Amount double DEFAULT 0.0,
+    PRIMARY KEY (report_id),   
+   foreign key (session_id) references sessions (session_id) 
+       
 );
 INSERT INTO wash_modes(washType,wash_mode_name,cleaning_machine_name,pitch,speed,lower_wash_sector,upper_wash_sector,wash_sector,full_cycle,cleaning_time_in_Minutes)
 VALUES

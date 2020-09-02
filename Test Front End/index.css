@@ -1,10 +1,8 @@
 #myTitle{
-    color: blue;
-    margin-left: 250px;
+    color: rgb(21, 21, 102);
+    margin-left: 500px;
 }
-.container{
-   margin-top: 70px;
-}
+
 .btn btn-secondary{
     
     font-size: xx-large;
@@ -18,7 +16,7 @@
   .col-8{
     margin: auto;
     text-align: center;
-    border: 3px solid green;
+    
     padding: 10px;
   }
   .btn btn-dark{
@@ -54,7 +52,7 @@
       background:linear-gradient(-45deg,#d2524e 25%,transparent 25%,transparent 50%,#d2524e 50%,#d2524e 75%,transparent 75%,transparent); background-size: 60px 60px; ;
   }
   .container{
-      margin-top: 50px;
+      margin-top: 20px;
   }
   .valueH{
       margin-left: 10%;

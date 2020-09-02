@@ -1,8 +1,5 @@
 package com.kockumation.backEnd.engine.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class Process {
 
     private int tcmId;
@@ -16,7 +13,34 @@ public class Process {
     private int processStatus;
     private double currentNozzleAngle;
    private String stringCurrentNozzleAngle;
+    private String nozzle_diameter;
+    private double nozzle_diameter_throughput;
+    private int stepNumber;
 
+
+    public int getStepNumber() {
+        return stepNumber;
+    }
+
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
+    }
+
+    public String getNozzle_diameter() {
+        return nozzle_diameter;
+    }
+
+    public void setNozzle_diameter(String nozzle_diameter) {
+        this.nozzle_diameter = nozzle_diameter;
+    }
+
+    public double getNozzle_diameter_throughput() {
+        return nozzle_diameter_throughput;
+    }
+
+    public void setNozzle_diameter_throughput(double nozzle_diameter_throughput) {
+        this.nozzle_diameter_throughput = nozzle_diameter_throughput;
+    }
 
     public String getStringCurrentNozzleAngle() {
         return stringCurrentNozzleAngle;
