@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css" >
+    <title>Session Details</title>
+  </head>
+  <body>
+      <main id="sessionDetailsMain">
+        <h2 id="myTitle">Report Details</h2>
+
+        <table id="reportTable" class="table">
+            <thead>
+              <tr>
+                <th class="dateId" scope="col">Report ID</th>
+                <th class="dateId" scope="col">Report Start Date</th>
+                <th class="dateId" scope="col">Report End Date</th>
+                <th class="dateId" scope="col">General Plan ID</th>
+                <th class="dateId" scope="col">Session Id</th>                
+                <th scope="col">tankId</th>
+                <th scope="col">tcmId</th>
+                <th scope="col">profileNumber</th>
+                <th scope="col">Machine Name</th>
+                <th scope="col">nozzle_diameter</th>
+                <th scope="col">uWsValue</th>
+                <th scope="col">lWsValue</th>
+                <th scope="col">cycle</th>
+                <th scope="col">Pitch</th>
+                <th scope="col">Rpm</th>
+                <th scope="col">Speed</th>
+                <th scope="col">washing_Media_Amount</th>
+
+              </tr>
+            </thead>
+            <tbody id="reportBody">
+
+            </tbody>
+          </table>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-2">
+                <button id="getReport" type="button" class="btn btn-dark">Get Report</button> 
+              </div>
+              <div class="col-lg">
+                <div class="form-group row">
+                    <div><h2>*</h2></div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" required pattern="^((?:19|20)\d\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])\s(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$"   placeholder="Type valid report ID.. Like    2020-09-04 07:04:30 " id="reportIdInput">
+                    </div>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+
+
+          
+         
+         
+
+      </main>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script type="text/javascript" src="getReportById.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

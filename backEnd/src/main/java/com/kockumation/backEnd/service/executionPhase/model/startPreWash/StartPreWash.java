@@ -2,15 +2,14 @@ package com.kockumation.backEnd.service.executionPhase.model.startPreWash;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StartPreWash {
+
     @NotNull
     @NotBlank(message = "General Plan Id is mandatory")
+    @Pattern(regexp="^((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])\\s(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$",message="Not Valid")
     private String general_plan_id;
 
     @Min(1)
@@ -18,12 +17,9 @@ public class StartPreWash {
     private int tcmId;
 
     @NotNull
-    @NotBlank(message = "Step profile name is mandatory")
-    private String step_profile_name;
-    @NotNull
     @Min(1)
     @Max(15)
-    private int stepNumber;
+    private int profileNumber;
     //private int stepNumber;
     @NotNull
     @Min(1)
@@ -46,20 +42,14 @@ public class StartPreWash {
         this.tcmId = tcmId;
     }
 
-    public String getStep_profile_name() {
-        return step_profile_name;
+
+
+    public int getProfileNumber() {
+        return profileNumber;
     }
 
-    public void setStep_profile_name(String step_profile_name) {
-        this.step_profile_name = step_profile_name;
-    }
-
-    public int getStepNumber() {
-        return stepNumber;
-    }
-
-    public void setStepNumber(int stepNumber) {
-        this.stepNumber = stepNumber;
+    public void setProfileNumber(int profileNumber) {
+        this.profileNumber = profileNumber;
     }
 
     public int getTimeForOperation() {
@@ -75,8 +65,8 @@ public class StartPreWash {
         return "StartPreWash{" +
                 "general_plan_id='" + general_plan_id + '\'' +
                 ", tcmId=" + tcmId +
-                ", step_profile_name='" + step_profile_name + '\'' +
-                ", stepProfile=" + stepNumber +
+
+                ", stepProfile=" + profileNumber +
                 ", timeForOperation=" + timeForOperation +
                 '}';
     }

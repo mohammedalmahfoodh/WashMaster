@@ -11,7 +11,16 @@ public class TankInfo {
     private String machine_char;
     private String machineName;
     private String nozzle_diameter;
+    private String cleaning_machine_name;
 
+
+    public String getCleaning_machine_name() {
+        return cleaning_machine_name;
+    }
+
+    public void setCleaning_machine_name(String cleaning_machine_name) {
+        this.cleaning_machine_name = cleaning_machine_name;
+    }
 
     public String getMachineName() {
         return machineName;

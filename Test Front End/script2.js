@@ -13,9 +13,7 @@ window.onload = () => {
     ///************************************** */
 
     let progressbar = document.getElementById('progressbar');
-    let part = 1;
-    let whole = 100;
-
+    
 
     ///******************** */
     let finishTimeDom = document.getElementById('finishTime');
@@ -33,15 +31,16 @@ window.onload = () => {
 
     let finishTime;
     let elapsedTime;
-    let remainingTime;
-    let decimalOfPercentage;
+    let remainingTime;   
     let percentage;
+    let stringPercentage;
     let processStatus;
     let currentNozzleAngle;
+    let stringCurrentNozzleAngle;
     let nozzleDiameter;
     let throughputPerHour;
-    let step;
-    let stepProfileName;
+    let stepNumber;
+    let profileNumber;
 
 
     let resumeProcess = function () {
@@ -82,27 +81,28 @@ window.onload = () => {
                     finishTime = res.data.finishTime;
                     elapsedTime = res.data.elapsedTime;
                     remainingTime = res.data.remainingTime;
-                    decimalOfPercentage = res.data.decimalOfPercentage;
+                    percentage = res.data.percentage;
+                    stringPercentage = res.data.stringPercentage;
                     processStatus = res.data.processStatus;
                     percentage = res.data.percentage;
-                    currentNozzleAngle = res.data.stringCurrentNozzleAngle;
-                     nozzleDiameter = res.data.nozzle_diameter;
+                    stringCurrentNozzleAngle = res.data.stringCurrentNozzleAngle;
+                    nozzleDiameter = res.data.nozzle_diameter;
                     throughputPerHour = res.data.nozzle_diameter_throughput;
-                    step = res.data.stepNumber;
-                    stepProfileName = res.data.step_profile_name;
+                    stepNumber = res.data.stepNumber;
+                    stepProfileName = "Tank Wash";
 
                     //******************************************************* */
                     finishTimeDom.innerText = finishTime;
                     elapsedTimeDom.innerText = elapsedTime;
                     remainingTimeDom.innerText = remainingTime;
-                    percentageDom.innerText = percentage;
-                    currentNozzleAngleDom.innerText = currentNozzleAngle ;
+                    percentageDom.innerText = stringPercentage;
+                    currentNozzleAngleDom.innerText = stringCurrentNozzleAngle ;
                     nozzleDiameterDom.innerText = nozzleDiameter ;
                     throughputPerHourDom.innerHTML = throughputPerHour;
-                    stepDom.innerText = step;
+                    stepDom.innerText = stepNumber;
                     stepProfileNameDom.innerText = stepProfileName;
-                    progressbar.style.setProperty('width', decimalOfPercentage + '%');
-                    progressbar.style.setProperty('aria-valuenow', decimalOfPercentage);
+                    progressbar.style.setProperty('width', percentage + '%');
+                    progressbar.style.setProperty('aria-valuenow', percentage);
                     switch (processStatus) {
                         case 0:
                           processStatusDom.innerText = 'Finished';
@@ -114,7 +114,7 @@ window.onload = () => {
                         case 1:
                             processStatusDom.innerText = 'Working...';
                             progressbar.style.setProperty('color', '#eb4934');
-                            processStatusDom.style.setProperty('color','#611309');
+                            processStatusDom.style.setProperty('color','#eb4934');
                             break;
 
                         case 2:
@@ -160,16 +160,16 @@ window.onload = () => {
     let startWash = function () {
         axios.post('http://192.168.12.68:3003/api/startWash', {
             tcmId: 2,
-            general_plan_id: "2020-09-01 13:33:12",
-            stepNumber: 4,
-            step_profile_name: "wash",
-            rpm: 2,
-            bar: 10.5,
-            speed: 2,
-            pitch: 2,
+            general_plan_id:"2020-09-04 10:54:13",
+            stepNumber: 3,
+            profileNumber: 4,
+            rpm: 3,
+            bar: 7,
+            speed: 1,
+            pitch: 1.5,
             lWsValue: 0,
-            uWsValue: 30,
-            cleaning_time_in_minutes: 8
+            uWsValue: 10,
+            cleaning_time_in_minutes: 5
         }
 
         ).then((result) => {

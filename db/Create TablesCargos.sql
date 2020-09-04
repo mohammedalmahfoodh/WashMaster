@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS tank_plans (
         ON DELETE CASCADE,
      FOREIGN KEY (tcmId)
         REFERENCES tank_info (tcmId)
-        ON DELETE CASCADE
+       
         
 );
 
@@ -259,16 +259,18 @@ CREATE TABLE IF NOT EXISTS reports (
     report_id VARCHAR(100) NOT NULL,   
     session_id VARCHAR(100) DEFAULT NULL,
     general_plan_id VARCHAR(100) NOT NULL, 
+    tankId int DEFAULT NULL,
     tcmId int NOT NULL ,   
     machineName varchar(100) DEFAULT NULL,
-    nozzle_diameter varchar(100) DEFAULT NULL,
-    nozzle_diameter_throughput double DEFAULT 0.0,
+    nozzle_diameter double DEFAULT 0.0,    
     stepNumber int DEFAULT 0,
-    step_profile_name varchar(100) DEFAULT NULL,
+    profileNumber int DEFAULT 0,
+    lWsValue double DEFAULT 0.0, 
+    uWsValue double DEFAULT 0.0, 
     cleaning_time varchar(100) DEFAULT NULL,
     report_start_date VARCHAR(100),
     report_end_date VARCHAR(100),      
-    cycle INT DEFAULT 0,
+    cycle double DEFAULT 0,
     rpm double default 0.0,
     speed int(11) DEFAULT 0,
     pitch double DEFAULT 0.0,

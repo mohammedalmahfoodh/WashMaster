@@ -134,6 +134,7 @@ public class InitiateDataBase {
               tankCleaningMachine.setTankName(tankInfo.getTankName());
               tankCleaningMachine.setMachineName(tankInfo.getMachineName());
               tankCleaningMachine.setNozzle_diameter(tankInfo.getNozzle_diameter());
+              tankCleaningMachine.setCleaning_machine_name(tankInfo.getCleaning_machine_name());
 
                 DB.tcmMap.put(tankInfo.getTcmId(),tankCleaningMachine);
             }

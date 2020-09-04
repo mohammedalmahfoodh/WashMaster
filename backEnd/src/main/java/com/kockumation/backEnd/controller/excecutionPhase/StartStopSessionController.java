@@ -194,4 +194,32 @@ StartStopSessionService startStopSessionService;
         return responseEntity;
     } // Stop Or Pause Session  ******************** Stop Or Pause Session **************************
 
+
+    //*************************************************************************************************************
+    @PostMapping("/getSession")
+    public ResponseEntity<Process> getSession(@Valid @RequestBody StopSession stopSession) {
+        ResponseEntity<Process> responseEntity = null;
+        Process process = new Process();
+        boolean    sessionResumed = false;
+        try {
+            process = startStopSessionService.getProcess(stopSession).get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+
+        responseEntity = new ResponseEntity<Process>(
+                process,
+                HttpStatus.OK);
+
+
+
+        return responseEntity;
+    } // Stop Or Pause Session  ******************** Stop Or Pause Session **************************
+
+
 }

@@ -8,6 +8,7 @@ F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\contro
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\CargosService.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\cargo\CleaningGuideInstructions.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan\GetGeneralPlanById.java
+F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\sessionsReports\SessionsReportsService.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\tankInfo\GetTankInfo.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\executionPhase\model\startPreWash\StartPreWash.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\controller\PlanPhase\MachineController.java
@@ -19,9 +20,11 @@ F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\utilit
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan\GeneralInfo.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\engine\model\TimePeriod.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\controller\PlanPhase\WashModesController.java
+F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\controller\SessionsAndReportsController\SessionsReportsController.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\engine\dataBase\InitiateDataBase.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\engine\model\Process.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\controller\PlanPhase\PlanController.java
+F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\engine\model\Session.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\Global\DB.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\service\planPhaseServices\cargos\model\machine\MachinePostObject.java
 F:\Java\Projects\WashMaster\backEnd\src\main\java\com\kockumation\backEnd\utilities\TankInfo.java

@@ -1,19 +1,15 @@
 
 window.onload = () => {
 
-
-
     let startWashButt = document.getElementById('startWash');
     let stopWashButt = document.getElementById('stopWash');
     let resumeWashButt = document.getElementById('resumeWash');
 
     let washInterval;
 
-
     ///************************************** */
 
-    let progressbar = document.getElementById('progressbar');
-    
+    let progressbar = document.getElementById('progressbar');    
 
     ///******************** */
     let finishTimeDom = document.getElementById('finishTime');
@@ -26,21 +22,19 @@ window.onload = () => {
     let stepProfileNameDom = document.getElementById('stepProfileName');
 
 
-
     let finishTime;
     let elapsedTime;
     let remainingTime;
-    let decimalOfPercentage;
-    let percentage;
-    let processStatus;
-   
-    let step;
+    let percentage;    
+    let stringPercentage;
+    let processStatus;   
+    let stepNumber;
     let stepProfileName;
 
 
     let resumeProcess = function () {
         axios.post('http://192.168.12.68:3003/api/resumeWash', {
-            tcmId: 1
+            tcmId: 5
         }).then((res) => {
             console.log(res)
         }).catch((err) => {
@@ -49,11 +43,9 @@ window.onload = () => {
     }
 
 
-
-
     let stopProcess = function () {
         axios.post('http://192.168.12.68:3003/api/stopOrPauseWash', {
-            tcmId: 1
+            tcmId: 5
         }).then((res) => {
             console.log(res)
         }).catch((err) => {
@@ -65,7 +57,7 @@ window.onload = () => {
     let getProcess = function () {
         washInterval = setInterval(() => {
             axios.post('http://192.168.12.68:3003/api/getProcess', {
-                tcmId: 1
+                tcmId: 5
             }).then((res) => {
                 console.log(res)
                 if (res.data.processStatus === 0) {
@@ -76,22 +68,22 @@ window.onload = () => {
                     finishTime = res.data.finishTime;
                     elapsedTime = res.data.elapsedTime;
                     remainingTime = res.data.remainingTime;
-                    decimalOfPercentage = res.data.decimalOfPercentage;
+                    percentage = res.data.percentage;
                     processStatus = res.data.processStatus;
-                    percentage = res.data.percentage;                  
+                    stringPercentage = res.data.stringPercentage;                  
                                         
-                    step = res.data.stepNumber;
-                    stepProfileName = res.data.step_profile_name;
+                    stepNumber = res.data.stepNumber;
+                    stepProfileName = 'Pre-Clean Flushing';
 
                     //******************************************************* */
                     finishTimeDom.innerText = finishTime;
                     elapsedTimeDom.innerText = elapsedTime;
                     remainingTimeDom.innerText = remainingTime;
-                    percentageDom.innerText = percentage;                   
-                    stepDom.innerText = step;
+                    percentageDom.innerText = stringPercentage;                   
+                    stepDom.innerText = stepNumber;
                     stepProfileNameDom.innerText = stepProfileName;
-                    progressbar.style.setProperty('width', decimalOfPercentage + '%');
-                    progressbar.style.setProperty('aria-valuenow', decimalOfPercentage);
+                    progressbar.style.setProperty('width', percentage + '%');
+                    progressbar.style.setProperty('aria-valuenow', percentage);
                     switch (processStatus) {
                         case 0:
                           processStatusDom.innerText = 'Finished';
@@ -148,10 +140,10 @@ window.onload = () => {
 
     let startWash = function () {
         axios.post('http://192.168.12.68:3003/api/startPreWash', {
-            tcmId: 1,
-            general_plan_id: "2020-09-02 14:50:26",
-            stepNumber: 1,
-            step_profile_name: "Pre-Clean Flushing",           
+            tcmId: 5,
+            general_plan_id:"2020-09-04 10:54:13",
+            stepNumber: 1,   
+            profileNumber:2,                   
             timeForOperation: 1
         }
 

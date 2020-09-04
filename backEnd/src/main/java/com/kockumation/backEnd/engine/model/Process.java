@@ -3,19 +3,23 @@ package com.kockumation.backEnd.engine.model;
 public class Process {
 
     private int tcmId;
-    private String step_profile_name;
+    private int profileNumber;
+    private int stepNumber;
     private String finishTime;
     private String elapsedTime;
     private String RemainingTime;
-
-    private String percentage;
-    private double decimalOfPercentage;
+    private double percentage;
     private int processStatus;
-    private double currentNozzleAngle;
-   private String stringCurrentNozzleAngle;
-    private String nozzle_diameter;
+    private String stringCurrentNozzleAngle;
+    private double nozzle_diameter;
     private double nozzle_diameter_throughput;
-    private int stepNumber;
+
+    private String stringPercentage;
+    private double currentNozzleAngle;
+
+
+
+
 
 
     public int getStepNumber() {
@@ -26,11 +30,11 @@ public class Process {
         this.stepNumber = stepNumber;
     }
 
-    public String getNozzle_diameter() {
+    public double getNozzle_diameter() {
         return nozzle_diameter;
     }
 
-    public void setNozzle_diameter(String nozzle_diameter) {
+    public void setNozzle_diameter(double nozzle_diameter) {
         this.nozzle_diameter = nozzle_diameter;
     }
 
@@ -74,20 +78,20 @@ public class Process {
         this.finishTime = finishTime;
     }
 
-    public String getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(String percentage) {
+    public void setPercentage(double percentage) {
         this.percentage = percentage;
     }
 
-    public double getDecimalOfPercentage() {
-        return decimalOfPercentage;
+    public String getStringPercentage() {
+        return stringPercentage;
     }
 
-    public void setDecimalOfPercentage(double decimalOfPercentage) {
-        this.decimalOfPercentage = decimalOfPercentage;
+    public void setStringPercentage(String stringPercentage) {
+        this.stringPercentage = stringPercentage;
     }
 
     public int getTcmId() {
@@ -98,12 +102,12 @@ public class Process {
         this.tcmId = tcmId;
     }
 
-    public String getStep_profile_name() {
-        return step_profile_name;
+    public int getProfileNumber() {
+        return profileNumber;
     }
 
-    public void setStep_profile_name(String step_profile_name) {
-        this.step_profile_name = step_profile_name;
+    public void setProfileNumber(int profileNumber) {
+        this.profileNumber = profileNumber;
     }
 
     public String getElapsedTime() {
@@ -126,12 +130,12 @@ public class Process {
     public String toString() {
         return "Process{" +
                 "tcmId=" + tcmId +
-                ", step_profile_name='" + step_profile_name + '\'' +
+                ", step_profile_name='" + profileNumber + '\'' +
                 ", finishTime='" + finishTime + '\'' +
                 ", elapsedTime='" + elapsedTime + '\'' +
                 ", RemainingTime='" + RemainingTime + '\'' +
                 ", percentage='" + percentage + '\'' +
-                ", decimalOfPercentage=" + decimalOfPercentage +
+                ", decimalOfPercentage=" + stringPercentage +
                 ", processStatus=" + processStatus +
                 ", currentNozzleAngle=" + currentNozzleAngle +
                 ", stringCurrentNozzleAngle='" + stringCurrentNozzleAngle + '\'' +

@@ -26,26 +26,18 @@ import java.util.concurrent.Future;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TankCleaningMachine {
-    @Autowired
-    private MachineService machineService;
-    @Autowired
-    private GetGeneralPlan getGeneralPlan;
 
-    @Min(1)
-    @Max(55)
+
     private int tcmID;
-
     private int tankId;
     private String tankName;
 
-    @NotNull
-    @Min(1)
-    @Max(15)
     private int stepNumber;
+    private int profileNumber;
 
     private String general_plan_id;
-    private String step_profile_name;
     private String washingMedia;
+    private double cy;
     private double rpm;
     private double bar;
     private int speed;
@@ -56,8 +48,9 @@ public class TankCleaningMachine {
 
     private double wholeTime;
     private double elapsedTimeMilli;
-    private double decimalOfPercentage;
-    private String percentage;
+    private double percentage;
+    private String stringPercentage;
+
     private Process process;
     private int processStatus;
 
@@ -77,7 +70,7 @@ public class TankCleaningMachine {
     private double nozzle_diameter_throughput;
     private double nozzle_diameter_throughput_forTotalTime;
     private Timer timer;
-
+    private String cleaning_machine_name;
 
     private String session_id;
     private String session_start_date;
@@ -132,7 +125,6 @@ public class TankCleaningMachine {
                 String updatePontoons = "UPDATE sessions set session_end_date = ? where (session_id = ? );";
                 PreparedStatement preparedStmt = conn.prepareStatement(updatePontoons, Statement.RETURN_GENERATED_KEYS);
 
-
                 try {
                     preparedStmt.setString(1, session_end_date);
 
@@ -146,7 +138,6 @@ public class TankCleaningMachine {
                         return false;
                     });
                 }
-
 
             } catch (NullPointerException e) {
                 System.out.print("Session not updated");
@@ -168,26 +159,28 @@ public class TankCleaningMachine {
     public Future<Boolean> insertReport() {
 
         try (Connection conn = MySQLJDBCUtil.getConnection()) {
-            String query = "INSERT INTO reports (report_id,session_id,general_plan_id,tcmId,machineName,nozzle_diameter,nozzle_diameter_throughput,stepNumber,step_profile_name,cleaning_time,report_start_date,report_end_date,cycle,rpm,speed,pitch,washing_Media_Amount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO reports (report_id,session_id,general_plan_id,tcmId,machineName,nozzle_diameter,tankId,stepNumber,profileNumber,cleaning_time,report_start_date,report_end_date,cycle,rpm,speed,pitch,washing_Media_Amount,uWsValue,lWsValue) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             preparedStmt.setString(1, report_id);
             preparedStmt.setString(2, session_id);
             preparedStmt.setString(3, general_plan_id);
             preparedStmt.setInt(4, tcmID);
-            preparedStmt.setString(5, machineName);
-            preparedStmt.setString(6, nozzle_diameter);
-            preparedStmt.setDouble(7, nozzle_diameter_throughput);
+            preparedStmt.setString(5, cleaning_machine_name);
+            preparedStmt.setDouble(6, process.getNozzle_diameter());
+            preparedStmt.setInt(7, tankId);
             preparedStmt.setInt(8, stepNumber);
-            preparedStmt.setString(9, step_profile_name);
+            preparedStmt.setInt(9, profileNumber);
             preparedStmt.setString(10, elapsedTime.getTimePeriod());
             preparedStmt.setString(11, report_start_date);
             preparedStmt.setString(12, report_end_date);
-            preparedStmt.setInt(13, 0);
+            preparedStmt.setDouble(13, cy);
             preparedStmt.setDouble(14, rpm);
             preparedStmt.setInt(15, speed);
             preparedStmt.setDouble(16, pitch);
             preparedStmt.setDouble(17, washing_Media_Amount);
+            preparedStmt.setDouble(18, uWsValue);
+            preparedStmt.setDouble(19, lWsValue);
 
             int rowAffected = preparedStmt.executeUpdate();
             preparedStmt.clearParameters();
@@ -234,32 +227,39 @@ public class TankCleaningMachine {
         });
     } // Is General Plan Id exists in sessions table ******** Is General Plan Id exists in sessions table  ********************
 
+    private void calculateCycle(){
+        if (pitch >0 && speed > 0 && washingSector > 0){
+            cy  = (cleaning_time_in_minutes * pitch * speed * rpm) / (washingSector * 2);
+            System.out.println("Cy is: "+cy);
+        }
+    }
     // Save Report *****************************  Save Report ******************************************
     private void saveReport() {
-         double timeInHours = (double) cleaning_time_in_minutes / 60;
-        System.out.println("cleaning time minute: "+cleaning_time_in_minutes);
-        System.out.println("time in hours: "+timeInHours);
+        double timeInHours = (double) cleaning_time_in_minutes / 60;
+        System.out.println("cleaning time minute: " + cleaning_time_in_minutes);
+        System.out.println("time in hours: " + timeInHours);
 
-                timeInHours = roundTowDigits(timeInHours);
+        timeInHours = roundTowDigits(timeInHours);
+        calculateCycle();
 
-                 washing_Media_Amount = nozzle_diameter_throughput * (timeInHours);
-        System.out.println("washing media.."+washing_Media_Amount);
+        washing_Media_Amount = nozzle_diameter_throughput * (timeInHours);
+        washing_Media_Amount = roundTowDigits(washing_Media_Amount);
+        System.out.println("washing media.." + washing_Media_Amount);
         try {
-           // System.out.println("start report: "+report_start_date);
+            // System.out.println("start report: "+report_start_date);
             session_id = isSessionIdExists().get();
-           // System.out.println(session_id);
+            // System.out.println(session_id);
             if (session_id == null) {
                 session_id = report_start_date;
-                System.out.println("SEssion: "+session_id);
-                System.out.println("report "+report_start_date);
+                System.out.println("SEssion: " + session_id);
+                System.out.println("report " + report_start_date);
                 boolean sessionInserted = insertSession().get();
-                 if (sessionInserted){
+                if (sessionInserted) {
                     insertReport();
-                 }
-
+                }
 
             } else {
-                System.out.println("Session id not nullllllll");
+
                 boolean sessionUpdated = updateSessions().get();
                 if (sessionUpdated) {
                     insertReport();
@@ -308,7 +308,6 @@ public class TankCleaningMachine {
                 return na2;
             }
 
-
         }
 
 
@@ -323,11 +322,12 @@ public class TankCleaningMachine {
         process.setRemainingTime(remainingTime.getTimePeriod());
         process.setStepNumber(stepNumber);
         process.setStringCurrentNozzleAngle(stringCurrentNozzleAngle);
+        process.setCurrentNozzleAngle(currentNozzleAngle);
         process.setPercentage(percentage);
-        process.setDecimalOfPercentage(decimalOfPercentage);
+        process.setStringPercentage(stringPercentage);
         process.setProcessStatus(processStatus);
-        process.setStep_profile_name(step_profile_name);
-        String numberOnly = nozzle_diameter.replaceAll("[^0-9]", "") + " mm";
+        process.setProfileNumber(profileNumber);
+        double numberOnly = Double.parseDouble(nozzle_diameter.replaceAll("[^0-9]", ""));
         process.setNozzle_diameter(numberOnly);
 
         process.setNozzle_diameter_throughput(getNozzle_diameter_throughput());
@@ -354,12 +354,13 @@ public class TankCleaningMachine {
             session_id = session_start_date;
             report_id = report_start_date;
 
+
             stepNumber = startWash.getStepNumber();
-            step_profile_name = startWash.getStep_profile_name();
+            profileNumber = startWash.getProfileNumber();
             cleaning_time_in_minutes = startWash.getCleaning_time_in_minutes();
             finishTime.setMilliseconds(cleaning_time_in_minutes * 60 * 1000);
             wholeTime = finishTime.getMilliseconds();
-            step_profile_name = startWash.getStep_profile_name();
+            profileNumber = startWash.getProfileNumber();
             lWsValue = startWash.getlWsValue();
             uWsValue = startWash.getuWsValue();
             washingSector = startWash.getuWsValue() - startWash.getlWsValue();
@@ -367,7 +368,7 @@ public class TankCleaningMachine {
             rpm = startWash.getRpm();
             speed = startWash.getSpeed();
 
-
+             calculateCycle();
             startWash();
         }
     }//// Create new Wash Operation **************************************  Create new Wash Operation *************** //////////
@@ -393,9 +394,8 @@ public class TankCleaningMachine {
             cleaning_time_in_minutes = startPreWash.getTimeForOperation();
             finishTime.setMilliseconds(cleaning_time_in_minutes * 60 * 1000);
             wholeTime = finishTime.getMilliseconds();
-            stepNumber = startPreWash.getStepNumber();
-            step_profile_name = startPreWash.getStep_profile_name();
-
+            stepNumber = startPreWash.getProfileNumber();
+            profileNumber = startPreWash.getProfileNumber();
 
 
             startPreWash();
@@ -419,11 +419,13 @@ public class TankCleaningMachine {
         finishTime = null;
         wholeTime = 0.0;
         elapsedTimeMilli = 0.0;
-        decimalOfPercentage = 0.0;
-        percentage = null;
+        percentage = 0.0;
         session_id = null;
-
-
+        rpm = 0;
+        speed = 0;
+        pitch = 0;
+        washing_Media_Amount = 0;
+        nozzle_diameter_throughput_forTotalTime = 0.0;
     }////// Reset Values ******************************** Reset Values /////////////////////////////////
 
 
@@ -461,16 +463,16 @@ public class TankCleaningMachine {
                     }
 
                     elapsedTimeMilli = elapsedTime.getMilliseconds();
-                    double elapsedTimeMin = (elapsedTimeMilli / 1000) / 60;
-                    decimalOfPercentage = roundTowDigits((elapsedTimeMilli / wholeTime));
-                    decimalOfPercentage = decimalOfPercentage * 100;
-                    percentage = (int) decimalOfPercentage + " %";
+
+                    percentage = (elapsedTimeMilli / wholeTime) * 100;
+                    percentage = roundTowDigits(percentage);
+                    stringPercentage = (int) percentage + " %";
                     //  System.out.println( (2.0 / 10.0));
                     System.out.println("Finish Time is: " + finishTime.getTimePeriod());
                     System.out.println("Elapsed Time is: " + elapsedTime.getTimePeriod());
                     System.out.println("Remaining Time is: " + remainingTime.getTimePeriod());
                     System.out.println("Percentage: " + percentage);
-                    if (decimalOfPercentage > 100) {
+                    if (percentage > 100) {
                         processStatus = 3;
                     }
 
@@ -528,18 +530,19 @@ public class TankCleaningMachine {
 
                     elapsedTimeMilli = elapsedTime.getMilliseconds();
                     double elapsedTimeMin = (elapsedTimeMilli / 1000) / 60;
-                    decimalOfPercentage = roundTowDigits((elapsedTimeMilli / wholeTime));
-                    decimalOfPercentage = decimalOfPercentage * 100;
-                    percentage = (int) decimalOfPercentage + " %";
+                    percentage = (elapsedTimeMilli / wholeTime) * 100;
+                    percentage = roundTowDigits(percentage);
+                    stringPercentage = (int) percentage + " %";
                     //  System.out.println( (2.0 / 10.0));
                     System.out.println("Finish Time is: " + finishTime.getTimePeriod());
                     System.out.println("Elapsed Time is: " + elapsedTime.getTimePeriod());
                     System.out.println("Remaining Time is: " + remainingTime.getTimePeriod());
                     System.out.println("Percentage: " + percentage);
-                    if (decimalOfPercentage > 100) {
+                    if (percentage > 100) {
                         processStatus = 3;
                     }
                     currentNozzleAngle = getCurrentNa(elapsedTimeMin);
+                    currentNozzleAngle = roundTowDigits(currentNozzleAngle);
                     stringCurrentNozzleAngle = roundTowDigits(currentNozzleAngle) + "\u00B0";
                     System.out.println(stringCurrentNozzleAngle);
                     updateProcess();
@@ -641,14 +644,6 @@ public class TankCleaningMachine {
 
     public void setStepNumber(int stepNumber) {
         this.stepNumber = stepNumber;
-    }
-
-    public String getStep_profile_name() {
-        return step_profile_name;
-    }
-
-    public void setStep_profile_name(String step_profile_name) {
-        this.step_profile_name = step_profile_name;
     }
 
     public String getWashingMedia() {
@@ -771,6 +766,14 @@ public class TankCleaningMachine {
         this.nozzle_diameter_throughput_forTotalTime = nozzle_diameter_throughput_forTotalTime;
     }
 
+    public String getCleaning_machine_name() {
+        return cleaning_machine_name;
+    }
+
+    public void setCleaning_machine_name(String cleaning_machine_name) {
+        this.cleaning_machine_name = cleaning_machine_name;
+    }
+
     @Override
     public String toString() {
         return "TankCleaningMachine{" +
@@ -778,7 +781,7 @@ public class TankCleaningMachine {
                 ", tankId=" + tankId +
                 ", tankName='" + tankName + '\'' +
                 ", stepProfile=" + stepNumber +
-                ", step_profile_name='" + step_profile_name + '\'' +
+                ", step_profile_name='" + profileNumber + '\'' +
                 ", washingMedia='" + washingMedia + '\'' +
                 ", rpm=" + rpm +
                 ", bar=" + bar +
@@ -789,7 +792,7 @@ public class TankCleaningMachine {
                 ", finishTime=" + finishTime +
                 ", wholeTime=" + wholeTime +
                 ", elapsedTimeMilli=" + elapsedTimeMilli +
-                ", decimalOfPercentage=" + decimalOfPercentage +
+                ", decimalOfPercentage=" + percentage +
                 ", percentage='" + percentage + '\'' +
                 ", process=" + process +
                 ", processStatus=" + processStatus +

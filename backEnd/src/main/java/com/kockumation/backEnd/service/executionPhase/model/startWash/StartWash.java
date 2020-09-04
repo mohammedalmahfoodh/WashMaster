@@ -2,27 +2,27 @@ package com.kockumation.backEnd.service.executionPhase.model.startWash;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StartWash {
     @Min(1)
     @Max(55)
     private int tcmId;
 
+    @Min(1)
+    @Max(30)
+  private int stepNumber;
     @NotNull
     @Min(1)
-    @Max(15)
-    private int stepNumber;
+    @Max(25)
+    private int profileNumber;
 
     @NotNull
     @NotBlank(message = "General Plan Id is mandatory")
+    @Pattern(regexp="^((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])\\s(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$",message="Not Valid")
     private String general_plan_id;
-    @NotNull
-    @NotBlank(message = "Step profile name is mandatory")
-    private String step_profile_name;
+
     private String washingMedia;
 
     @NotNull
@@ -39,7 +39,7 @@ public class StartWash {
     private int speed;
     @NotNull
     @Min(1)
-    @Max(1500)
+    @Max(10)
     private double pitch;
 
     @NotNull
@@ -75,20 +75,15 @@ public class StartWash {
         this.tcmId = tcmId;
     }
 
-    public int getStepNumber() {
-        return stepNumber;
+
+
+
+    public int getProfileNumber() {
+        return profileNumber;
     }
 
-    public void setStepNumber(int stepNumber) {
-        this.stepNumber = stepNumber;
-    }
-
-    public String getStep_profile_name() {
-        return step_profile_name;
-    }
-
-    public void setStep_profile_name(String step_profile_name) {
-        this.step_profile_name = step_profile_name;
+    public void setProfileNumber(int profileNumber) {
+        this.profileNumber = profileNumber;
     }
 
     public String getWashingMedia() {
@@ -153,5 +148,13 @@ public class StartWash {
 
     public void setuWsValue(double uWsValue) {
         this.uWsValue = uWsValue;
+    }
+
+    public int getStepNumber() {
+        return stepNumber;
+    }
+
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
     }
 }
