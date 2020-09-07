@@ -99,9 +99,9 @@ public class SessionsReportsController {
             reportObject = sessionsReportsService.getReport(getReportById.getReport_id()).get();
             if (reportObject.size() == 0) {
                 System.out.println("No report for this id ");
-                return ResponseEntity
-                        .status(HttpStatus.NO_CONTENT)
-                        .body("Report not exists with report Id "+ getReportById.getReport_id());
+                return new ResponseEntity<>(
+                        "No report for this id " + getReportById.getReport_id(),
+                        HttpStatus.NOT_FOUND);
             } else {
                 responseEntity = new ResponseEntity<JSONObject>(
                         reportObject,
@@ -123,14 +123,15 @@ public class SessionsReportsController {
 
         JSONObject sessionObject = new JSONObject();
 
-        ResponseEntity<JSONObject> responseEntity = null;
+        ResponseEntity responseEntity = null;
         try {
             sessionObject = sessionsReportsService.getSessionObject(getSessionById.getSession_id()).get();
             if (sessionObject.size() == 0) {
                 System.out.println("No session for this id ");
-                return ResponseEntity
-                        .status(HttpStatus.NO_CONTENT)
-                        .body("Session not exists with session Id "+ getSessionById.getSession_id());
+
+                return new ResponseEntity<>(
+                        "No session for this id " + getSessionById.getSession_id(),
+                        HttpStatus.NOT_FOUND);
 
             } else {
                 responseEntity = new ResponseEntity<JSONObject>(

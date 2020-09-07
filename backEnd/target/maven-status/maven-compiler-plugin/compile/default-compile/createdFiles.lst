@@ -4,12 +4,14 @@ com\kockumation\backEnd\utilities\MySQLJDBCUtil.class
 com\kockumation\backEnd\service\executionPhase\StartStopSessionService.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\MachineService.class
 com\kockumation\backEnd\controller\PlanPhase\WashModesController.class
+com\kockumation\backEnd\utilities\MethodArgumentNotValidExceptionHandler$Error.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan\SubmissionPlanObject.class
 com\kockumation\backEnd\utilities\TankInfo.class
 com\kockumation\backEnd\engine\model\Session.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\machine\MachineName.class
 com\kockumation\backEnd\service\executionPhase\model\startWash\StopSession.class
 com\kockumation\backEnd\controller\SessionsAndReportsController\SessionsReportsController.class
+com\kockumation\backEnd\service\sessionsReports\model\GetSessionById.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\cargo\CargosModel.class
 com\kockumation\backEnd\utilities\TanksInformation.class
 com\kockumation\backEnd\engine\TankCleaningMachine.class
@@ -19,6 +21,7 @@ com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan
 com\kockumation\backEnd\service\executionPhase\model\startPreWash\StartPreWash.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\tankInfo\GetTankInfo.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\washMode\GetWashMode.class
+com\kockumation\backEnd\service\sessionsReports\model\GetReportById.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\PlanSubmissionService.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\machine\MachinePostObject.class
 com\kockumation\backEnd\engine\TankCleaningMachine$2.class
@@ -41,6 +44,7 @@ com\kockumation\backEnd\service\planPhaseServices\cargos\model\submitGeneralPlan
 com\kockumation\backEnd\engine\PlanEngine.class
 com\kockumation\backEnd\utilities\WebConfig.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\WashModesService.class
+com\kockumation\backEnd\utilities\MethodArgumentNotValidExceptionHandler.class
 com\kockumation\backEnd\engine\dataBase\InitiateDataBase.class
 com\kockumation\backEnd\service\planPhaseServices\cargos\model\cargo\CargoToBeLoaded.class
 com\kockumation\backEnd\utilities\TanksConfig.class

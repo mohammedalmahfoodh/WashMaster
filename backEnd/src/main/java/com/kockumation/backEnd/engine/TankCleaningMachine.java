@@ -49,7 +49,7 @@ public class TankCleaningMachine {
     private double wholeTime;
     private double elapsedTimeMilli;
     private double percentage;
-    private String stringPercentage;
+
 
     private Process process;
     private int processStatus;
@@ -64,7 +64,7 @@ public class TankCleaningMachine {
     private double washingSector;
     boolean runningSession;
     private double currentNozzleAngle;
-    private String stringCurrentNozzleAngle;
+
     private String machineName;
     private String nozzle_diameter;
     private double nozzle_diameter_throughput;
@@ -321,10 +321,8 @@ public class TankCleaningMachine {
         process.setElapsedTime(elapsedTime.getTimePeriod());
         process.setRemainingTime(remainingTime.getTimePeriod());
         process.setStepNumber(stepNumber);
-        process.setStringCurrentNozzleAngle(stringCurrentNozzleAngle);
         process.setCurrentNozzleAngle(currentNozzleAngle);
         process.setPercentage(percentage);
-        process.setStringPercentage(stringPercentage);
         process.setProcessStatus(processStatus);
         process.setProfileNumber(profileNumber);
         double numberOnly = Double.parseDouble(nozzle_diameter.replaceAll("[^0-9]", ""));
@@ -466,7 +464,7 @@ public class TankCleaningMachine {
 
                     percentage = (elapsedTimeMilli / wholeTime) * 100;
                     percentage = roundTowDigits(percentage);
-                    stringPercentage = (int) percentage + " %";
+
                     //  System.out.println( (2.0 / 10.0));
                     System.out.println("Finish Time is: " + finishTime.getTimePeriod());
                     System.out.println("Elapsed Time is: " + elapsedTime.getTimePeriod());
@@ -532,7 +530,7 @@ public class TankCleaningMachine {
                     double elapsedTimeMin = (elapsedTimeMilli / 1000) / 60;
                     percentage = (elapsedTimeMilli / wholeTime) * 100;
                     percentage = roundTowDigits(percentage);
-                    stringPercentage = (int) percentage + " %";
+
                     //  System.out.println( (2.0 / 10.0));
                     System.out.println("Finish Time is: " + finishTime.getTimePeriod());
                     System.out.println("Elapsed Time is: " + elapsedTime.getTimePeriod());
@@ -543,8 +541,8 @@ public class TankCleaningMachine {
                     }
                     currentNozzleAngle = getCurrentNa(elapsedTimeMin);
                     currentNozzleAngle = roundTowDigits(currentNozzleAngle);
-                    stringCurrentNozzleAngle = roundTowDigits(currentNozzleAngle) + "\u00B0";
-                    System.out.println(stringCurrentNozzleAngle);
+                   // stringCurrentNozzleAngle = roundTowDigits(currentNozzleAngle) + "\u00B0";
+
                     updateProcess();
 
                 } else {
@@ -802,7 +800,6 @@ public class TankCleaningMachine {
                 ", washingSector=" + washingSector +
                 ", runningSession=" + runningSession +
                 ", currentNozzleAngle=" + currentNozzleAngle +
-                ", stringCurrentNozzleAngle='" + stringCurrentNozzleAngle + '\'' +
                 ", timer=" + timer +
                 ", executor=" + executor +
                 '}';

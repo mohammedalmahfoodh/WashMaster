@@ -10,11 +10,8 @@ public class Process {
     private String RemainingTime;
     private double percentage;
     private int processStatus;
-    private String stringCurrentNozzleAngle;
     private double nozzle_diameter;
     private double nozzle_diameter_throughput;
-
-    private String stringPercentage;
     private double currentNozzleAngle;
 
 
@@ -46,13 +43,6 @@ public class Process {
         this.nozzle_diameter_throughput = nozzle_diameter_throughput;
     }
 
-    public String getStringCurrentNozzleAngle() {
-        return stringCurrentNozzleAngle;
-    }
-
-    public void setStringCurrentNozzleAngle(String stringCurrentNozzleAngle) {
-        this.stringCurrentNozzleAngle = stringCurrentNozzleAngle;
-    }
 
     public double getCurrentNozzleAngle() {
         return currentNozzleAngle;
@@ -86,13 +76,6 @@ public class Process {
         this.percentage = percentage;
     }
 
-    public String getStringPercentage() {
-        return stringPercentage;
-    }
-
-    public void setStringPercentage(String stringPercentage) {
-        this.stringPercentage = stringPercentage;
-    }
 
     public int getTcmId() {
         return tcmId;
@@ -135,10 +118,8 @@ public class Process {
                 ", elapsedTime='" + elapsedTime + '\'' +
                 ", RemainingTime='" + RemainingTime + '\'' +
                 ", percentage='" + percentage + '\'' +
-                ", decimalOfPercentage=" + stringPercentage +
                 ", processStatus=" + processStatus +
                 ", currentNozzleAngle=" + currentNozzleAngle +
-                ", stringCurrentNozzleAngle='" + stringCurrentNozzleAngle + '\'' +
                 '}';
     }
 }

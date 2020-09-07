@@ -44,7 +44,7 @@ public class StartWash {
 
     @NotNull
     @Min(1)
-    @Max(1500)
+    @Max(1700)
     private int cleaning_time_in_minutes;
 
     @NotNull

@@ -1,0 +1,696 @@
+{
+	"info": {
+		"_postman_id": "6e03b961-1624-4ab5-a723-ac0ed52a4f85",
+		"name": "WashMaster",
+		"description": "Test wash master APIS for this nuc only.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Plan Phase",
+			"item": [
+				{
+					"name": "Get previous Cargos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/previousCargos",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"previousCargos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cargos To Be Loaded",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/cargosToBeLoaded",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"cargosToBeLoaded"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cleaning Instructions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"cargo_id\": 2,\r\n        \"cargo_loaded_id\":20 \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/getCleaningInstructions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getCleaningInstructions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Mchines Names",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/getCapacityMachinesNames",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getCapacityMachinesNames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Tank Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getTankInfo",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getTankInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Capacity Data For Machine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"machineName\":\"pj15_capacity_data\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getCapacityDataForMachine",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getCapacityDataForMachine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Capacity Data For Bar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"machineName\":\"PJ30_capacity_data\",\r\n        \"bar\":6.6\r\n          \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getCapacityDataForBar",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getCapacityDataForBar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wash Mode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"washType\":4\t,\r\n  \"speed\":0,\r\n  \"washingSector\":0,\r\n  \"desiredTime\":0,\r\n  \"bar\":11,\r\n  \"machineName\":\"pj30_capacity_data\",\r\n  \"numberOfMachines\":1,\r\n  \"nozzle_diameter\":\"nozzle_diameter_24_throughput\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getWashMode",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getWashMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wash Type Ids Names",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/getWashTypeIdsNames",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getWashTypeIdsNames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get General Plan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"general_plan_id\": \"2020-08-31 06:30:16\"\r\n          \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/getGeneralPlan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getGeneralPlan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User Name By TcmId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\": 6\r\n          \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/getUserNameByTcmId",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getUserNameByTcmId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "General Plans Ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/generalPlansIds",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"generalPlansIds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Manual Wash mode calculations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n  \"uWsValue\":135,\r\n  \"lWsValue\":0,\r\n  \"speed\":1,  \r\n  \"desiredTime\":0,\r\n  \"pitch\":1.5,\r\n  \"rpm\":3,  \r\n  \"bar\":11,\r\n  \"machineName\":\"pj30_capacity_data\",\r\n  \"numberOfMachines\":2,\r\n  \"nozzle_diameter\":\"nozzle_diameter_24_throughput\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getManualWashMode",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getManualWashMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit General Plan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"generalInfo\": {\n    \"vesselName\": \"Mafuta - Verolme\",\n    \"planID\": \"123\",\n    \"voyageId\": \"h122\",\n    \"nextLoadPort\": \"Malmo\",   \n    \"sequenceOfWashing\": \"CT1P,CT1s,CT2P,CT2s\",\n    \"positionOfTankCleaning\": \"Fixed\",\n    \"manualLocation\": \"Dayton\",\n    \"genInfoDate\": \"2020-09-03\",\n    \"genInfoTime\": \"07:39 PM\",\n    \"machineName\": \"pj15_capacity_data\",\n    \"nozzle_diameter\": \"nozzle_diameter_12_throughput\",\n    \"userName\": \"Meamo\"\n  },\n  \"tanks\": [\n    {\n      \"tankId\": 1,\n      \"cleaningMethod\": \"Charterers\",\n      \"previousCargo\": \"Naphtha / Clean Condensates / LDF\",\n      \"nextCargo\": \"Naphtha / Clean Condensates / LDF\",\n      \"cleaningMethod2\": 5,      \n      \"hcLabel\":\"lel\",\n      \"nextMarpol\":\"false,true\",\n      \"previousMarpol\": \"true,false\",     \n      \"stepsCtr\": 2,\n      \"tankCoating\": \"1\",\n      \"tankAtmosphere\": \"1\",\n      \"oxygenLevel\": 2.5,\n      \"hc\": 500.8,\n      \"tcmIda\": 1,\n      \"tcmIdb\": 0,\n      \"tankComments\": \"32\",\n      \"steps\": [\n        {\n          \"stepProfile\": 1,\n          \"stepNumber\": 1,\n          \"timeForOperation\": 60,\n          \"step_profile_name\": \"pre-Clean Flushing\",\n          \"washingMedia2\":1,\n          \"comments\":\"Add more oil next time \"\n\n        },\n        {\n          \"stepProfile\": 4,\n          \"step_profile_name\": \"Tank wash\",\n          \"stepNumber\": 2,\n          \"washingMedia\": 5,\n          \"washingMedia2\":2,\n          \"comments\":\"Add more water next time\",\n          \"lWsValue\": 45,\n          \"uWsValue\": 135,\n          \"cleaning_time_in_minutes\": 12,\n          \"rpm\": 1,\n          \"bar\": 8,\n          \"speed\": 2,\n          \"pitch\": 1.5,\n          \"washType\": 1\n        }\n      ]\n    },\n    {\n      \"tankId\": 3,\n      \"cleaningMethod\": \"Recommended\",\n      \"previousCargo\": \"Naphtha / Clean Condensates / LDF\",\n      \"nextCargo\": \"Light Fuel Oil (LFO)\",      \n      \"hcLabel\":\"lel\",\n      \"stepsCtr\": 1,\n      \"tankCoating\": \"1\",\n      \"tankAtmosphere\": \"1\",\n      \"numberOfMachines\":1,\n      \"oxygenLevel\": 5,\n      \"hc\": 400,\n      \"tcmIda\": 0,\n      \"tcmIdb\": 6,\n      \"tankComments\": \"Clear blabal to get blaabla\",\n      \"steps\": [\n        {\n          \"stepProfile\": 4,\n          \"step_profile_name\": \"Tank wash\",\n          \"stepNumber\": 1,\n          \"washingMedia\":4,          \n          \"lWsValue\": 33,\n          \"uWsValue\": 140,\n          \"cleaning_time_in_minutes\": 60,\n          \"speed\": 2,\n          \"pitch\": 7,\n          \"rpm\": 1,\n          \"bar\": 6,\n          \"washType\": 1\n        }\n      ]\n    },\n    {\n      \"tankId\": 11,\n      \"cleaningMethod\": \"Charterers\",\n      \"previousCargo\": \"Unleaded Motor Spirit\",\n       \"nextCargo\": \"Dyed Gas Oil\",      \n      \"hcLabel\":\"lel\",\n      \"numberOfMachines\":2,\n      \"stepsCtr\": 3,\n      \"tankCoating\": \"1\",\n      \"tankAtmosphere\": \"1\",\n      \"oxygenLevel\": 2.5,\n      \"hc\": 300,\n      \"tcmIda\": 21,\n      \"tcmIdb\": 22,\n      \"tankComments\": \"Add something to clean up blablalba\",\n      \"steps\": [\n        {\n          \"stepProfile\": 2,\n          \"stepNumber\": 1,\n          \"timeForOperation\": 50,\n          \"step_profile_name\": \"NZ Purge\",\n           \"washingMedia2\":3,\n          \"comments\":\"Add more fruit next time\"\n        },\n        {\n          \"stepProfile\": 3,\n          \"stepNumber\": 2,\n          \"timeForOperation\": 20,\n          \"step_profile_name\": \"Gas Freeing\"\n        },\n        {\n          \"stepProfile\": 4,\n          \"step_profile_name\": \"Tank wash\",\n          \"stepNumber\": 3,\n          \"washingMedia\": 1,         \n          \"lWsValue\": 0,\n          \"uWsValue\": 180,\n          \"cleaning_time_in_minutes\": 25,\n          \"speed\": 2,\n          \"pitch\": 3,\n          \"rpm\": 1,\n          \"bar\": 6,\n          \"washType\": 1\n        }\n      ]\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/submitPlan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"submitPlan"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Execution Phase",
+			"item": [
+				{
+					"name": "Get Process",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\":10\r\n       \r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getProcess",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getProcess"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\":10,\r\n        \"general_plan_id\":\"2020-09-04 06:47:36\",\r\n        \"stepNumber\":1,\r\n        \"profileNumber\":4,\r\n        \"rpm\":2,\r\n        \"bar\":6,\r\n        \"speed\":1,\r\n        \"pitch\":1,\r\n         \"lWsValue\":0,\r\n         \"uWsValue\":25,\r\n        \"cleaning_time_in_minutes\":3\r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/startWash",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"startWash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "start Pre Wash",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\":10,\r\n        \"general_plan_id\":\"2020-09-03 14:05:49\",\r\n        \"stepNumber\":1,\r\n        \"profileNumber\":3,        \r\n        \"timeForOperation\":2        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/startPreWash",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"startPreWash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stop Or Pause Wash",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\":5\r\n       \r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/stopOrPauseWash",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"stopOrPauseWash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resume Wash",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tcmId\":5\r\n       \r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/resumeWash",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"resumeWash"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sessions And Reports",
+			"item": [
+				{
+					"name": "Get Reports Ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.81:3003/api/getReportsIds",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"81"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getReportsIds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sessions Ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getSessionsIds",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getSessionsIds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report By Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"report_id\":\"2020-09-04 07:04:25\"\r\n          \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getReportById",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getReportById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Session By Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"report_id\":\"2020-09-04 10:55:21\"\r\n          \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.12.68:3003/api/getSessionById",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"12",
+								"68"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"getSessionById"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
